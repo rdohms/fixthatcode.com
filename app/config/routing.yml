@@ -1,3 +1,8 @@
+FTCAuthBundle:
+    resource: "@FTCAuthBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 DMSBaseBundle:
     resource: "@DMSBaseBundle/Controller/"
     type:     annotation
