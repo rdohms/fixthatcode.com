@@ -2,5 +2,12 @@ web/bundles/
 app/bootstrap.php.cache
 app/cache/*
 app/logs/*
+app/config/parameters.ini
+app/phpunit.xml
+
 build/
 vendor/
+tmp/*
+
+.DS_Store
+*.tmproj

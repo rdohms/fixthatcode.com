@@ -3,11 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        {% include 'DMSBaseBundle::stylesheets.html.twig' %}
         {% block stylesheets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
+        {% include 'DMSBaseBundle::javascript.html.twig' %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
