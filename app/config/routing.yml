@@ -1,3 +1,8 @@
+DMSLauncherBundle:
+    resource: "@DMSLauncherBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 FTCAuthBundle:
     resource: "@FTCAuthBundle/Controller/"
     type:     annotation
