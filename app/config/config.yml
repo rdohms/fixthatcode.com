@@ -1,10 +1,10 @@
 imports:
-    - { resource: parameters.ini }
+    - { resource: parameters.yml }
     - { resource: security.yml }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -12,14 +12,17 @@ framework:
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  %locale%
     session:
-        default_locale: %locale%
         auto_start:     true
 
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+           - 'MopaBootstrapBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -31,6 +34,9 @@ assetic:
         #     jar: %kernel.root_dir%/java/compiler.jar
         # yui_css:
         #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+        less:
+            node: /usr/bin/node
+            node_paths: [/usr/lib/node_modules]
 
 # Doctrine Configuration
 doctrine:
@@ -57,3 +63,19 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+dms_launcher:
+    site_url: "http://ftc.local"
+    twitter_account: "ftc"
+
+mopa_bootstrap:
+    form:
+        show_legend: false
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: FTC\Bundle\AuthBundle\Entity\User
+    registration:
+        form:
+            type: ftc_auth_registration

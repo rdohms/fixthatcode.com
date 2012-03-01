@@ -1,0 +1,15 @@
+parameters:
+  database_driver:   pdo_mysql
+  database_host:     localhost
+  database_port:     ~
+  database_name:     ftc
+  database_user:     root
+  database_password: root
+
+  mailer_transport:  smtp
+  mailer_host:       localhost
+  mailer_user:       ~
+  mailer_password:   ~
+
+  locale:            en
+  secret:            87f2671fe0f483a5571f55211107764c0e66df6c

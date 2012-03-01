@@ -1,0 +1,71 @@
+{% extends '::base.html.twig' %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="/bundles/ftcweb/css/ftc.css" type="text/css">
+{% endblock %}
+
+{% block body %}
+
+	{% block navbar %}
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">{% block brand %}Fix That Code!{% endblock %}</a>
+			
+					{% block nav_content %}
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+					</ul>
+					{% endblock %}
+				
+					{% block login_bar %}
+					<ul class="nav pull-right">
+						{% if has_security_context() %}
+							{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.user.username}} <b class="caret"></b></a>
+								    <ul class="dropdown-menu">
+								      <li><li><a href="">..</a></li></li>
+								    </ul>
+								</li>
+								<li><a href="/logout">Logout <i class="icon-off icon-white"></i></a></li>
+							{% else %}
+								<li><a href="{{ path('login') }}">Login</a></li>
+								<li><a href="/register">Register</a></li>
+							{% endif %}
+						{% endif %}
+					</ul>
+					{% endblock %}
+				
+			</div>
+		</div>
+	</nav>
+	{% endblock %}
+
+	{% block container %}
+		<div class="container">
+
+			<div class="page">
+
+				{% block flashes %}
+				{{ session_flash() }}
+				{% endblock flashes %}
+
+				<div class="content">
+					{% block content %}{% endblock %}
+				</div>
+
+				<footer>
+					{% block footer %}
+					<p>&copy; <a href="http://doh.ms" target="_blank">DMS Systems</a> {{ "now"|date('Y') }}</p>
+					{% endblock footer %}
+				</footer>
+			</div>
+
+
+		</div>
+	{% endblock container %}
+
+{% endblock %}

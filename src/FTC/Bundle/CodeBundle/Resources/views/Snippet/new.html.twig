@@ -1,0 +1,59 @@
+{% extends 'FTCWebBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="row">
+    <div class="span4">
+        <h1>Adding Snippet to <strong>{{ entry.title }}</strong></h1>        
+        <p>bla bla bla</p>
+    </div>
+	<div class="span8">
+
+		<form class="form-horizontal" action="{{ path('entry_snippet_create') }}" method="post" {{ form_enctype(form) }}>
+			{{ form_widget(form) }}
+			<pre id="editor" class="span8">
+&lt;?php
+
+/**
+* Add your code here
+*/
+			</pre>
+	        <div class="form-actions">
+				<input type="submit" class="btn btn-primary" name="done" value="I'm done!" />
+	            <input type="submit" class="btn btn-success" name="submit_more" value="Add another snippet" />
+	            <button type="reset" class="btn">Cancel</button>
+	        </div>
+		</form>
+
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/mode-php-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script>
+window.onload = function() {
+    var editor = ace.edit("editor");
+    editor.setShowPrintMargin(false);
+    editor.setTheme("ace/theme/twilight");
+
+    var PhpMode = ace.require("ace/mode/php").Mode;
+    editor.getSession().setMode(new PhpMode());
+    
+    editor.getSession().on('change', function(){
+        $('#ftc_bundle_codebundle_snippettype_code').val( editor.getSession().getValue() );
+        console.log(editor.getSession().getValue());
+    });
+};
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#ftc_bundle_codebundle_snippettype_code').parent().parent().hide();
+});
+</script>
+{% endblock %}
+

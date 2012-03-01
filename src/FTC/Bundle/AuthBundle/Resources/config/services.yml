@@ -1,0 +1,6 @@
+services:
+    ftc_auth.registration.form.type:
+        class: FTC\Bundle\AuthBundle\Form\RegistrationType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: ftc_auth_registration }
