@@ -1,0 +1,32 @@
+{% extends 'FTCWebBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="row">
+	<div class="span4">
+		<h2>Create a new Entry</h2>
+		<p>We want your code! Actually we want to help you with your code, make it better, make it more testable, just generally help you with it. 
+			In the worst case, we just want to see the bad code you found so that we can fix it and tell people to stay away from bad practices.</p>
+		<p>The process is rather simple: </p>
+		<ol>
+			<li>Describe your problem and what you expect to receive in this form.</li>
+			<li>Hit next and add a code snippet, you can add one, or separate it into multiple "files", do what feels best for you.</li>
+			<li>Hit Submit and we are ready to go, your code will be out there for people to bash, fix, analyze and generally look at it.</li>
+		</ol>
+		<p>Bad code should not make you ashamed. There are 1001 ways to solve any problem, by putting your code to the test, you are proving you are 
+			a mature developer and increase or risk of actually learning something new, or just seeing new ways from A to B.</p>
+		<p>Submit now!</p>
+	</div>
+	<div class="span8">
+
+		<form class="form-horizontal" action="{{ path("entry_create") }}" method="post" {{ form_enctype(form) }}>
+			{{ form_widget(form) }}
+	        <div class="form-actions">
+	            <button type="submit" class="btn btn-primary">Enough details, let me add some code!</button>
+	            <button type="reset" class="btn">Cancel</button>
+	        </div>
+		</form>
+
+	</div>
+</div>
+{% endblock %}
+

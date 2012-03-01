@@ -1,0 +1,7 @@
+services:
+    ftc_web.twig.extension.security:
+        class: FTC\Bundle\WebBundle\Twig\Security\SecurityExtension
+        arguments:
+            context: @security.context
+        tags:
+            -  { name: twig.extension }

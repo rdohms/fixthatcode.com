@@ -1,30 +1,29 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=v2.0.3
 
 [twig]
     git=http://github.com/fabpot/Twig.git
-    version=v1.1.2
+    version=origin/master
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git
-    version=1.0.1
+    version=1.0.2
 
 [doctrine-common]
     git=http://github.com/doctrine/common.git
-    version=2.1.1
+    version=origin/master
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
-    version=2.1.2
+    version=origin/master
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
-    version=2.1.1
+    version=origin/master
 
 [swiftmailer]
     git=http://github.com/swiftmailer/swiftmailer.git
-    version=v4.1.2
+    version=v4.1.5
 
 [assetic]
     git=http://github.com/kriswallsmith/assetic.git
@@ -35,11 +34,12 @@
 
 [metadata]
     git=http://github.com/schmittjoh/metadata.git
-    version=1.0.0
+    version=1.1.0
 
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+    version=origin/master
 
 [JMSSecurityExtraBundle]
     git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
@@ -49,17 +49,41 @@
 [SensioDistributionBundle]
     git=http://github.com/sensio/SensioDistributionBundle.git
     target=/bundles/Sensio/Bundle/DistributionBundle
-    version=origin/1.0
+    version=origin/master
 
 [SensioGeneratorBundle]
     git=http://github.com/sensio/SensioGeneratorBundle.git
     target=/bundles/Sensio/Bundle/GeneratorBundle
+    version=origin/master
 
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
-    version=v1.0.1
+    version=origin/master
 
+[DoctrineBundle]
+    git=http://github.com/doctrine/DoctrineBundle.git
+    target=/bundles/Doctrine/Bundle/DoctrineBundle
+    version=origin/master
+
+[SwiftmailerBundle]
+    git=http://github.com/symfony/SwiftmailerBundle.git
+    target=/bundles/Symfony/Bundle/SwiftmailerBundle
+    version=origin/master
+
+[MonologBundle]
+    git=http://github.com/symfony/MonologBundle.git
+    target=/bundles/Symfony/Bundle/MonologBundle
+    version=origin/master
+
+[FOSUserBundle]
+    git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
+    target=bundles/FOS/UserBundle
 
 [DMS]
-    git=https://rdohms@github.com/rdohms/DMS.git
+    git=http://github.com/rdohms/DMS.git
+    target=DMS
+
+[MopaBootstrapBundle]
+    git=git@github.com:rdohms/MopaBootstrapBundle.git
+    target=/bundles/Mopa/BootstrapBundle
