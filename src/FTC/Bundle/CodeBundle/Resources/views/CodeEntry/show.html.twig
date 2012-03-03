@@ -1,45 +1,26 @@
-<h1>CodeEntry</h1>
+{% extends 'FTCWebBundle::layout.html.twig' %}
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ entity.description }}</td>
-        </tr>
-        <tr>
-            <th>Datesubmited</th>
-            <td>{{ entity.dateSubmited|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Type</th>
-            <td>{{ entity.type }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block content %}
+<div class="row">
+    <div class="span9">
+        <span class="label label-info">{{ entry.getTargetUserTypeText() }}</span>
+        <h1>
+            {{ entry.title }} 
+            <!-- TODO: only if owner -->
+            <a href="{{ path('entry_edit', { 'id': entry.id }) }}" class="btn btn-mini"><i class="icon-pencil"></i></a>
+        </h1>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('entry') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('entry_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('entry_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+        
+
+        <ul class="record_actions">
+            <li>
+                
+            </li>
+        </ul>
+
+    </div>
+    <div class="span3">
+        <p>sidebar</p>
+    </div>
+</div>
+{% endblock %}

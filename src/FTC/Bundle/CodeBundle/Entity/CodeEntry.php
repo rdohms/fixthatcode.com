@@ -4,6 +4,7 @@ namespace FTC\Bundle\CodeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use FTC\Bundle\CodeBundle\Entity\Choice\CodeEntryTypeChoices;
 
 /**
  * FTC\Bundle\CodeBundle\Entity\CodeEntry
@@ -46,7 +47,7 @@ class CodeEntry
     /**
      * @var string $type
      *
-     * @ORM\Column(name="type", type="string", length=10)
+     * @ORM\Column(name="type", type="string", length=20)
      */
     private $type;
 
@@ -222,4 +223,9 @@ class CodeEntry
         return $this->snippets;
     }
 
+    public function getTargetUserTypeText()
+    {
+        $choices = new CodeEntryTypeChoices();
+        return $choices->getTargetUserText($this->getType());
+    }
 }
