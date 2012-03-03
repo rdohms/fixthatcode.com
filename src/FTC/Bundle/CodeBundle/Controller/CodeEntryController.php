@@ -47,16 +47,16 @@ class CodeEntryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('FTCCodeBundle:CodeEntry')->find($id);
+        $entry = $em->getRepository('FTCCodeBundle:CodeEntry')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find CodeEntry entity.');
+        if (!$entry) {
+            throw $this->createNotFoundException('We were unable to find this entry.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entry'      => $entry,
             'delete_form' => $deleteForm->createView(),        );
     }
 

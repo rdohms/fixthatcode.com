@@ -10,7 +10,13 @@ class SnippetType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array( 'attr' => array('class' => 'span6') ))
+            ->add('name', 'text', array(
+                'attr'       => array('class' => 'span6', 'placeholder' => 'untitled.php'),
+                'label'      => 'Filename',
+                'help_block' => 'We will use this to offer language compatible highlighting below and for organization',
+                'empty_data' => 'untitled.php',
+                'required'   => false,
+            ))
             ->add('code')
         ;
     }

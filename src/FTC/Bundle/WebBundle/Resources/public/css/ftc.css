@@ -3,11 +3,43 @@
 }
 
 #editor {
-    margin: 0;
+
     position: relative;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     height: 300px;
+    margin-left: 0px;
+}
+
+.form-actions{
+    background-color: white;
+    border-top: 0px;
+}
+
+.form-horizontal .form-actions-nomargin{
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+h1 strong{
+    color: #416e96
 }
