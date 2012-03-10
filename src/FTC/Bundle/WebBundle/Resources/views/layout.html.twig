@@ -57,9 +57,19 @@
 					{% block content %}{% endblock %}
 				</div>
 
-				<footer>
+				<footer class="well">
 					{% block footer %}
-					<p>&copy; <a href="http://doh.ms" target="_blank">DMS Systems</a> {{ "now"|date('Y') }}</p>
+					<div class="row-fluid">
+					   <div class="span6">
+					       &copy; {{ "now"|date('Y') }} - <a href="http://doh.ms" target="_blank">DMS Systems</a>
+					   </div>
+					   <div class="span6 right footer-nav">
+					       <ul>
+					           <li class="divider-vertical"><a href="#">blog</a></li>
+					           <li class="divider-vertical"><a href="#">about</a></li>
+					       </ul>
+					   </div>
+					</div>
 					{% endblock footer %}
 				</footer>
 			</div>
