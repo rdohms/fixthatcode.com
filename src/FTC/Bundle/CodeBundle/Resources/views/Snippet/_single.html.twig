@@ -1,0 +1,22 @@
+
+<pre id="editor-{{ snippet.id }}" class="editor">{{ snippet.code }}</pre>
+
+
+{% block javascripts %}
+<script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/mode-php-noconflict.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+window.onload = function() {
+    var editor = ace.edit("editor-{{ snippet.id }}");
+    editor.setShowPrintMargin(false);
+    editor.setTheme("ace/theme/twilight");
+
+    var PhpMode = ace.require("ace/mode/php").Mode;
+    editor.getSession().setMode(new PhpMode());
+};
+</script>
+{% endblock %}
+

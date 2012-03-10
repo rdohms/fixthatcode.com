@@ -2,11 +2,20 @@
     padding-top: 60px;
 }
 
-#editor {
-
+.editor, .editor-placeholder {
     position: relative;
     height: 300px;
-    margin-left: 0px;
+    margin-left: 0;
+}
+
+.editor-placeholder{
+    width: 0;
+    height: 315px
+}
+
+.editor-filename {
+    margin-bottom: 0;
+    padding: 5px;
 }
 
 .form-actions{
@@ -43,3 +52,24 @@ html[xmlns] .clearfix {
 h1 strong{
     color: #416e96
 }
+
+.sidebar h3 { border-bottom: 1px solid #ccc; margin-bottom: 5px; margin-top: 10px; }
+
+.right { text-align: right; }
+
+.profile h3{ margin-top: 0px; }
+
+footer { margin-top: 35px; }
+
+.footer-nav { }
+.footer-nav ul {
+    margin-left: 0;
+    margin-bottom: 18px;
+    list-style: none;
+}
+.footer-nav ul li { float: right; padding: 0 15px; }
+
+.stats {}
+.stats dt, .stats dd {line-height: 30px; float: left;}
+.stats dt { font-size: 200%; clear: left; }
+.stats dd { }
