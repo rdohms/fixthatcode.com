@@ -52,7 +52,22 @@
         </div>
         <div class="row">
             <div class="span9">
-                <p>No reactions yet, be the first: <a href="#">comment</a> or <a href="#">tweak the code</a></p>
+                {% for comment in entry.comments %}
+                    <p>{{comment.comment}}</p>
+                {% else %}
+                    <p>No reactions yet, be the first: <a href="#">comment</a> or <a href="#">tweak the code</a></p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span9">
+        		<form class="form-horizontal form-nolabels" action="{{ path("entry_comment_create", {id: entry.id}) }}" method="post" {{ form_enctype(comment_form) }}>
+        			{{ form_widget(comment_form) }}
+        	        <div class="form-actions-nomargin">
+        	            <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i> comment</button>
+        	            <button type="reset" class="btn">Cancel</button>
+        	        </div>
+        		</form>
             </div>
         </div>
     </div>

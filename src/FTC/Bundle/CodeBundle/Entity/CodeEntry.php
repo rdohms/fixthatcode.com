@@ -72,6 +72,13 @@ class CodeEntry
      */
     protected $snippets;
 
+    /**
+     * @var Doctrine\Common\Collections\ArrayCollection $comments
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="entry")
+     */
+    protected $comments;
+
     public function __construct()
     {
         $this->dateSubmited = new \DateTime();
@@ -80,7 +87,7 @@ class CodeEntry
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -102,7 +109,7 @@ class CodeEntry
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -124,7 +131,7 @@ class CodeEntry
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -146,7 +153,7 @@ class CodeEntry
     /**
      * Get dateSubmited
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateSubmited()
     {
@@ -168,7 +175,7 @@ class CodeEntry
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -227,5 +234,21 @@ class CodeEntry
     {
         $choices = new CodeEntryTypeChoices();
         return $choices->getTargetUserText($this->getType());
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

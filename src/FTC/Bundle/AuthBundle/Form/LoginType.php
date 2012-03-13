@@ -19,9 +19,9 @@ class LoginType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options){
         $builder
-            ->add('_username')
-            ->add('_password', 'password')
-            ->add('_remember_me', 'checkbox', array('required' => false));
+            ->add('username')
+            ->add('password', 'password')
+            ->add('remember_me', 'checkbox', array('required' => false));
 
     }
 
@@ -29,7 +29,7 @@ class LoginType extends AbstractType
      * @return string
      */
     public function getName(){
-        return 'caas_user_login';
+        return 'login';
     }
 }
 
