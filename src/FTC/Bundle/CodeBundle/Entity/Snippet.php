@@ -29,7 +29,7 @@ class Snippet
     private $name;
 
     /**
-     * @var text $code
+     * @var string $code
      *
      * @ORM\Column(name="code", type="text")
      */
@@ -43,9 +43,32 @@ class Snippet
     protected $entry;
 
     /**
+     * @var \FTC\Bundle\AuthBundle\Entity\User $author
+     *
+     * @ORM\OneToOne(targetEntity="FTC\Bundle\AuthBundle\Entity\User")
+     */
+    protected $author;
+
+    /**
+     * @var \FTC\Bundle\CodeBundle\Entity\Snippet $parent
+     *
+     * @ORM\OneToOne(targetEntity="Snippet")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $parent;
+
+    /**
+     * @var \FTC\Bundle\CodeBundle\Entity\Comment $comment
+     *
+     * @ORM\OneToOne(targetEntity="Comment")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $comment;
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -67,7 +90,7 @@ class Snippet
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -77,7 +100,7 @@ class Snippet
     /**
      * Set code
      *
-     * @param text $code
+     * @param string $code
      * @return Snippet
      */
     public function setCode($code)
@@ -89,7 +112,7 @@ class Snippet
     /**
      * Get code
      *
-     * @return text 
+     * @return string
      */
     public function getCode()
     {

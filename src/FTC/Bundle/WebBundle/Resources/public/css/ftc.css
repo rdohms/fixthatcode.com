@@ -28,6 +28,10 @@
     padding-left: 0px;
 }
 
+.form-nolabels .controls{
+    margin-left: 0px;
+}
+
 .clearfix:after {
     content: ".";
     display: block;

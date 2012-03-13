@@ -12,4 +12,20 @@ class Controller extends BaseController
     {
         return $this->get('session');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Session\Flash\FlashBag
+     */
+    public function getFlashBag()
+    {
+        return $this->get('session')->getFlashBag();
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->getDoctrine()->getEntityManager();
+    }
 }

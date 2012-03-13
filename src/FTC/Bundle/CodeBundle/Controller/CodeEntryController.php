@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FTC\Bundle\CodeBundle\Entity\CodeEntry;
 use FTC\Bundle\CodeBundle\Form\CodeEntryType;
+use FTC\Bundle\CodeBundle\Entity\Comment;
+use FTC\Bundle\CodeBundle\Form\CommentType;
 
 /**
  * CodeEntry controller.
@@ -39,9 +41,9 @@ class CodeEntryController extends Controller
      * @Route("/{id}/show", name="entry_show")
      * @Template()
      *
+     * @param $id
+     * @return array
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @param int $id
-     * @return mixed
      */
     public function showAction($id)
     {
@@ -53,11 +55,12 @@ class CodeEntryController extends Controller
             throw $this->createNotFoundException('We were unable to find this entry.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $commentForm = $this->createForm(new \FTC\Bundle\CodeBundle\Form\CommentType() );
 
         return array(
-            'entry'      => $entry,
-            'delete_form' => $deleteForm->createView(),        );
+            'entry'        => $entry,
+            'comment_form' => $commentForm->createView(),
+        );
     }
 
     /**

@@ -19,7 +19,15 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                csrf_provider: form.csrf_provider
+                username_parameter: login[username]
+                password_parameter: login[password]
+            remember_me:
+                key: 870da5627130d5a84ebf0f21d3370841
+                name: CaasRM
+                lifetime: 3600 # in seconds
+                path: /
+                always_remember_me: false
+                remember_me_parameter: login[remember_me]
             logout:       true
             anonymous:    true
 
