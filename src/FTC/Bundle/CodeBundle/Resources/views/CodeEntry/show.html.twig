@@ -53,7 +53,23 @@
         <div class="row">
             <div class="span9">
                 {% for comment in entry.comments %}
-                    <p>{{comment.comment}}</p>
+                    <div class="row-fluid comment">
+                        <div class="span12">
+                                <a href="#">
+                                    <img src="{{ gravatar(comment.author.email, 20) }}" alt="{{comment.author.username}}"> 
+                                    <strong>{{comment.author.fullname|default(comment.author.username)}}</strong>
+                                </a>
+
+                            commented on this code
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="well">
+                                {{ comment.comment }}                                
+                            </div>
+                        </div>
+                    </div>
                 {% else %}
                     <p>No reactions yet, be the first: <a href="#">comment</a> or <a href="#">tweak the code</a></p>
                 {% endfor %}
@@ -61,6 +77,7 @@
         </div>
         <div class="row">
             <div class="span9">
+                <h4>Comment on this code:</h4>
         		<form class="form-horizontal form-nolabels" action="{{ path("entry_comment_create", {id: entry.id}) }}" method="post" {{ form_enctype(comment_form) }}>
         			{{ form_widget(comment_form) }}
         	        <div class="form-actions-nomargin">
