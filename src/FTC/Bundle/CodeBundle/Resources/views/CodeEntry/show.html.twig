@@ -7,7 +7,7 @@
             <div class="span9">
                 <span class="label label-info">{{ entry.getTargetUserTypeText() }}</span>
 
-                <h1>
+                <h1 class="entry-title">
                     {{ entry.title }} 
                     <!-- TODO: only if owner -->
                     <a href="{{ path('entry_edit', { 'id': entry.id }) }}" class="btn btn-mini"><i class="icon-pencil"></i></a>
@@ -22,7 +22,7 @@
         </div>
         
         <div class="row">
-            <div class="span9">
+            <div class="span9 snippets">
                 {% for snippet in entry.snippets %}
                     <div class="well editor-filename">
                         <div class="row-fluid">
@@ -30,13 +30,13 @@
                                 <i class="icon-file"></i> {{ snippet.name }} (see latest | see top rated)                                
                             </div>
                             <div class="span2 right">
-                                <a href="#" class="btn btn-info btn-mini"><i class="icon-pencil icon-white"></i>  fork and edit</a>
+                                <a href="#" class="btn btn-info btn-mini btn-edit-code" rel="editor{{ snippet.id }}"><i class="icon-pencil icon-white"></i>  fork and edit</a>
                             </div>
                         </div>
                     </div>
                     
-                    <div id="editor-{{ snippet.id }}" class="editor span9">{{ snippet.code }}</div>
-                    <div id="editor-{{ snippet.id }}-placeholder" class="editor-placeholder"></div>                
+                    <div id="editor{{ snippet.id }}" class="editor span9">{{ snippet.code }}</div>
+                    <div id="editor{{ snippet.id }}-placeholder" class="editor-placeholder"></div>             
                 {% endfor %}
             </div>
         </div>
@@ -78,13 +78,13 @@
         <div class="row">
             <div class="span9">
                 <h4>Comment on this code:</h4>
-        		<form class="form-horizontal form-nolabels" action="{{ path("entry_comment_create", {id: entry.id}) }}" method="post" {{ form_enctype(comment_form) }}>
-        			{{ form_widget(comment_form) }}
-        	        <div class="form-actions-nomargin">
-        	            <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i> comment</button>
-        	            <button type="reset" class="btn">Cancel</button>
-        	        </div>
-        		</form>
+                <form class="form-horizontal form-nolabels" action="{{ path("entry_comment_create", {id: entry.id}) }}" method="post" {{ form_enctype(comment_form) }}>
+                    {{ form_widget(comment_form) }}
+                    <div class="form-actions-nomargin">
+                        <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i> comment</button>
+                        <button type="reset" class="btn">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -142,28 +142,82 @@
 <script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/mode-php-noconflict.js" type="text/javascript" charset="utf-8"></script>
-
+<script type="text/javascript" charset="utf-8">
+    var editors = {};
+</script>
 {% for snippet in entry.snippets %}
     
     <script>
     $(document).ready(function(){
-        var editor{{snippet.id}} = new ace.edit("editor-{{ snippet.id }}");
-        editor{{snippet.id}}.setShowPrintMargin(false);
-        editor{{snippet.id}}.setTheme("ace/theme/twilight");
-        editor{{snippet.id}}.setReadOnly(true);
-        editor{{snippet.id}}.getSession().setUseWrapMode(true);
+        editors.editor{{snippet.id}} = new ace.edit("editor{{ snippet.id }}");
+        editors.editor{{snippet.id}}.setShowPrintMargin(false);
+        editors.editor{{snippet.id}}.setTheme("ace/theme/twilight");
+        editors.editor{{snippet.id}}.setReadOnly(true);
+        editors.editor{{snippet.id}}.getSession().setUseWrapMode(true);
 
         var PhpMode = ace.require("ace/mode/php").Mode;
-        editor{{snippet.id}}.getSession().setMode(new PhpMode());
+        editors.editor{{snippet.id}}.getSession().setMode(new PhpMode());
         
-        size = editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
-        $("#editor-{{ snippet.id }}").height(size);
-        $("#editor-{{ snippet.id }}-placeholder").height(size + 20);
-        editor{{snippet.id}}.resize()
+        size = editors.editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
+        $("#editor{{ snippet.id }}").height(size);
+        $("#editor{{ snippet.id }}-placeholder").height(size + 20);
+        editors.editor{{snippet.id}}.resize();
+        
+        editors.editor{{snippet.id}}.getSession().on('change', function(){
+            size = editors.editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
+            $("#editor{{ snippet.id }}").height(size);
+            $("#editor{{ snippet.id }}-placeholder").height(size + 20);
+            editors.editor{{snippet.id}}.resize();
+        });
     });
     </script>
 
 {% endfor %}
 
 
+<script type="text/javascript">
+    
+    var wakeEditor = function(event) {
+        
+        var $btn, editorId, data, html;
+        
+        $btn     = $(event.currentTarget);
+        editorId = $btn.attr('rel')
+        
+        data     = { nodeId: editorId+'-form' }
+        
+        //get template
+        html = $.tmpl( "editCodeForm", data );
+                
+        //append form
+        $('#'+editorId+'-placeholder').after(html);
+        
+        //set variables
+        $('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
+        
+        editors[editorId].setReadOnly(false);
+    }
+    
+    $(document).ready( function() {
+    
+        $.template( "editCodeForm", $("#edit-code-form").html() );
+        $('.btn-edit-code').on('click', wakeEditor);
+        
+    });
+</script>
+
+<script type="text/template" id="edit-code-form">
+<div id="${nodeId}" class="row code-comment-form-row">
+    <div class="span9 code-comment-form">
+        <form class="form-horizontal form-nolabels" action="{{ path('entry_snippet_create') }}" method="post" {{ form_enctype(contrib_form) }}>
+            {{ form_widget(contrib_form) }}
+            <div class="form-actions-nomargin form-actions ">
+                <input type="submit" class="btn btn-primary" name="done" value="Submit changes" />
+                <button type="reset" class="btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 {% endblock %}

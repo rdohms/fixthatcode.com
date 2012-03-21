@@ -10,6 +10,7 @@ use FTC\Bundle\CodeBundle\Entity\CodeEntry;
 use FTC\Bundle\CodeBundle\Form\CodeEntryType;
 use FTC\Bundle\CodeBundle\Entity\Comment;
 use FTC\Bundle\CodeBundle\Form\CommentType;
+use FTC\Bundle\CodeBundle\Form\ContributeToSnippetType;
 
 /**
  * CodeEntry controller.
@@ -55,11 +56,13 @@ class CodeEntryController extends Controller
             throw $this->createNotFoundException('We were unable to find this entry.');
         }
 
-        $commentForm = $this->createForm(new \FTC\Bundle\CodeBundle\Form\CommentType() );
+        $commentForm    = $this->createForm(new CommentType() );
+        $contributeForm = $this->createForm(new ContributeToSnippetType());
 
         return array(
             'entry'        => $entry,
             'comment_form' => $commentForm->createView(),
+            'contrib_form' => $contributeForm->createView(),
         );
     }
 
