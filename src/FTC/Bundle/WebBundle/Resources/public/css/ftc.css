@@ -57,6 +57,8 @@ h1 strong{
     color: #416e96
 }
 
+h1.entry-title{ margin-bottom: 18px; }
+
 .sidebar h3 { border-bottom: 1px solid #ccc; margin-bottom: 5px; margin-top: 10px; }
 
 .right { text-align: right; }
@@ -77,3 +79,9 @@ footer { margin-top: 35px; }
 .stats dt, .stats dd {line-height: 30px; float: left;}
 .stats dt { font-size: 200%; clear: left; }
 .stats dd { }
+
+.code-comment-form { background-color: #E8E8E8; margin-bottom: 18px; padding-top: 15px;}
+
+.code-comment-form .form-actions { background-color: #E8E8E8; margin: 0; padding: 10px 5px;}
+.code-comment-form form { margin-bottom: 0; }
+.code-comment-form-row {margin-top: -20px; }
