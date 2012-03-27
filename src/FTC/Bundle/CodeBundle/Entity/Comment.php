@@ -43,6 +43,13 @@ class Comment
     protected $entry;
 
     /**
+     * @var \FTC\Bundle\CodeBundle\Entity\Snippet $snippet
+     *
+     * @ORM\OneToOne(targetEntity="Snippet", mappedBy="comment", cascade="none")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $snippet;
+    /**
      * Get id
      *
      * @return integer
@@ -104,5 +111,21 @@ class Comment
     public function getEntry()
     {
         return $this->entry;
+    }
+
+    /**
+     * @param \FTC\Bundle\CodeBundle\Entity\Snippet $snippet
+     */
+    public function setSnippet($snippet)
+    {
+        $this->snippet = $snippet;
+    }
+
+    /**
+     * @return \FTC\Bundle\CodeBundle\Entity\Snippet
+     */
+    public function getSnippet()
+    {
+        return $this->snippet;
     }
 }

@@ -45,14 +45,14 @@ class Snippet
     /**
      * @var \FTC\Bundle\AuthBundle\Entity\User $author
      *
-     * @ORM\OneToOne(targetEntity="FTC\Bundle\AuthBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FTC\Bundle\AuthBundle\Entity\User")
      */
     protected $author;
 
     /**
      * @var \FTC\Bundle\CodeBundle\Entity\Snippet $parent
      *
-     * @ORM\OneToOne(targetEntity="Snippet")
+     * @ORM\ManyToOne(targetEntity="Snippet")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $parent;
@@ -60,7 +60,7 @@ class Snippet
     /**
      * @var \FTC\Bundle\CodeBundle\Entity\Comment $comment
      *
-     * @ORM\OneToOne(targetEntity="Comment")
+     * @ORM\OneToOne(targetEntity="Comment", inversedBy="snippet", cascade={"persist", "remove", "merge"})
      * @ORM\JoinColumn(nullable=true)
      */
     protected $comment;
@@ -133,6 +133,54 @@ class Snippet
     public function getEntry()
     {
         return $this->entry;
+    }
+
+    /**
+     * @param \FTC\Bundle\AuthBundle\Entity\User $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return \FTC\Bundle\AuthBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param \FTC\Bundle\CodeBundle\Entity\Comment $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * @return \FTC\Bundle\CodeBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param \FTC\Bundle\CodeBundle\Entity\Snippet $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return \FTC\Bundle\CodeBundle\Entity\Snippet
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
 

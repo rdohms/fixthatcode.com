@@ -39,7 +39,7 @@
 
         "ornicar/gravatar-bundle":          "dev-master",
 
-        "rdohms/mopa-bootstrap-bundle":     "dev-master",
+        "mopa/bootstrap-bundle":     "dev-master",
 
         "dms/dms":                          "dev-master"
 
@@ -57,24 +57,6 @@
                     "reference": "master"
                 },
                 "target-dir": "DMS"
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "rdohms/mopa-bootstrap-bundle",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/rdohms/MopaBootstrapBundle.git",
-                    "type": "git",
-                    "reference": "master"
-                },
-                "autoload": {
-                    "psr-0": {
-                        "Mopa\\BootstrapBundle": ""
-                    }
-                },
-                "target-dir": "Mopa/BootstrapBundle"
             }
         }
     ],
