@@ -1,5 +1,5 @@
 {
-    "hash": "1ecc697a29e17eea4e35a81f04c4d0c4",
+    "hash": "29009417b65fd913c184193f8da1a257",
     "packages": [
         {
             "package": "dms/dms",
@@ -55,14 +55,14 @@
             "version": "1.0.2"
         },
         {
+            "package": "mopa/bootstrap-bundle",
+            "version": "dev-master",
+            "source-reference": "cc95e8ebb801939c6822329f997f8d66a78d7e5c"
+        },
+        {
             "package": "ornicar/gravatar-bundle",
             "version": "dev-master",
             "source-reference": "e5aedca3bd066081e16912ca8be96ba4ca570d0a"
-        },
-        {
-            "package": "rdohms/mopa-bootstrap-bundle",
-            "version": "dev-master",
-            "source-reference": "master"
         },
         {
             "package": "sensio/distribution-bundle",
@@ -106,7 +106,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "a00ae273a681cc4019cc457768d5265c958d9299"
+            "source-reference": "a00ae273a681cc4019cc457768d5265c958d9299",
+            "alias": "2.1.9999999.9999999-dev"
         },
         {
             "package": "twig/extensions",

@@ -109,7 +109,7 @@ class SnippetController extends Controller
         $em->persist($snippet);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->set('success', 'The snippet ' . $snippet->getName() . ' was added successfully');
+        $this->get('session')->getFlashBag()->add('success', 'The snippet ' . $snippet->getName() . ' was added successfully');
 
         if ($request->get('done') !== null ){
             return $this->redirect($this->generateUrl('entry_show', array('id' => $entry->getId())));
