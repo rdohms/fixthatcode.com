@@ -24,6 +24,7 @@ var codeEditor = {
 
         editor.resize();
 
+        //TODO: this resize is not working, check it
         editorSession.on('change', function(){
 
             var size = editorSession.getValue().split("\n").length * 20 + 15;
@@ -37,6 +38,32 @@ var codeEditor = {
 
         this.loadedEditors.divId = editor;
 
+    },
+
+    wakeEditor: function(event) {
+        var $btn, editorId, editor, data, html;
+
+        event.preventDefault();
+
+        $btn     = $(event.currentTarget);
+        editorId = $btn.attr('rel');
+        editor   = codeEditor.loadedEditors[editorId];
+        data     = { nodeId: editorId+'-form', formAction: $btn.attr('href') };
+
+        //get template
+        html = $.tmpl( "editCodeForm", data );
+
+        //append form
+        $('#'+editorId+'-placeholder').after(html);
+
+        //set variables
+        //$('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
+
+        editor.setReadOnly(false);
+        editor.getSession().on('change', function(){
+            $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
+            console.log(editor.getSession().getValue());
+        });
     },
 
     loadPageEditors: function() {

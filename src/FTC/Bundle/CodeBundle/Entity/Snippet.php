@@ -183,5 +183,13 @@ class Snippet
         return $this->parent;
     }
 
-
+    /**
+     * Returns the extension of a file
+     *
+     * @return string
+     */
+    public function getExtension()
+    {
+        return pathinfo($this->getName(), PATHINFO_EXTENSION);
+    }
 }
