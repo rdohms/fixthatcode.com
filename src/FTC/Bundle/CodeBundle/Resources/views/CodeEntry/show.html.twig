@@ -169,102 +169,49 @@
 <script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/mode-php-noconflict.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 <script src="/bundles/ftccode/js/code-editor.js" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript" charset="utf-8">
 
-    var PhpMode = ace.require("ace/mode/php").Mode;
-    //TODO use filter on collection to get all "types" and generate this list
-
+    //Load Editor modes for languages in use
+    {% for type in entry.getExtensionList() %}
+        {% if type%}
+            var {{type}}Mode = ace.require("ace/mode/{{type}}").Mode;
+        {% endif %}
+    {% endfor %}
 
 
     $(document).ready(function(){
 
+        //Request editors
         {% for snippet in entry.snippets %}
-            codeEditor.requestedEditors.push({id: "editor{{snippet.id}}", mode: new PhpMode()});
-        //TODO:  mode: new {{snippet.extension}}Mode
+            codeEditor.requestedEditors.push({id: "editor{{snippet.id}}", mode: new {{snippet.extension|default("php")}}Mode()});
         {% endfor %}
 
+        //Load Editors
         codeEditor.loadPageEditors();
-    });
 
-</script>
-{% for snippet in entry.snippets %}
-
-    <script>
-    // $(document).ready(function(){
-    //     editors.editor{{snippet.id}} = new ace.edit("editor{{ snippet.id }}");
-    //     editors.editor{{snippet.id}}.setShowPrintMargin(false);
-    //     editors.editor{{snippet.id}}.setTheme("ace/theme/twilight");
-    //     editors.editor{{snippet.id}}.setReadOnly(true);
-    //     editors.editor{{snippet.id}}.getSession().setUseWrapMode(true);
-    //     editors.editor{{snippet.id}}.getSession().setMode(new PhpMode());
-    //
-    //     size = editors.editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
-    //     $("#editor{{ snippet.id }}").height(size);
-    //     $("#editor{{ snippet.id }}-placeholder").height(size + 20);
-    //     editors.editor{{snippet.id}}.resize();
-    //
-    //     editors.editor{{snippet.id}}.getSession().on('change', function(){
-    //         size = editors.editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
-    //         $("#editor{{ snippet.id }}").height(size);
-    //         $("#editor{{ snippet.id }}-placeholder").height(size + 20);
-    //         editors.editor{{snippet.id}}.resize();
-    //     });
-    // });
-    </script>
-
-{% endfor %}
-
-
-<script type="text/javascript">
-
-    var wakeEditor = function(event) {
-
-        var $btn, editorId, editor, data, html;
-
-        event.preventDefault();
-
-        $btn     = $(event.currentTarget);
-        editorId = $btn.attr('rel')
-        editor   = editors[editorId];
-        data     = { nodeId: editorId+'-form', formAction: $btn.attr('href') };
-
-        //get template
-        html = $.tmpl( "editCodeForm", data );
-
-        //append form
-        $('#'+editorId+'-placeholder').after(html);
-
-        //set variables
-        //$('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
-
-        editor.setReadOnly(false);
-        editor.getSession().on('change', function(){
-            $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
-            console.log(editor.getSession().getValue());
-        });
-    };
-
-    $(document).ready( function() {
-
+        //Enable Edit buttons
         $.template( "editCodeForm", $("#edit-code-form").html() );
-        $('.btn-edit-code').on('click', wakeEditor);
-
+        $('.btn-edit-code').on('click', codeEditor.wakeEditor);
     });
+
 </script>
 
 <script type="text/template" id="edit-code-form">
-<div id="${nodeId}" class="row code-comment-form-row">
-    <div class="span9 code-comment-form">
-        <form class="form-horizontal form-nolabels" action="${formAction}" method="post" {{ form_enctype(contrib_form) }}>
-            {{ form_widget(contrib_form) }}
-            <div class="form-actions-nomargin form-actions ">
-                <input type="submit" class="btn btn-primary" name="done" value="Submit changes" />
-                <button type="reset" class="btn">Cancel</button>
-            </div>
-        </form>
+    <div id="${nodeId}" class="row code-comment-form-row">
+        <div class="span9 code-comment-form">
+            <form class="form-horizontal form-nolabels" action="${formAction}" method="post" {{ form_enctype(contrib_form) }}>
+                {{ form_widget(contrib_form) }}
+                <div class="form-actions-nomargin form-actions ">
+                    <input type="submit" class="btn btn-primary" name="done" value="Submit changes" />
+                    <button type="reset" class="btn">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+
 {% endblock %}

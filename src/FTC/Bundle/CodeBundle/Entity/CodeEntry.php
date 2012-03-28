@@ -251,4 +251,12 @@ class CodeEntry
     {
         return $this->comments;
     }
+
+    public function getExtensionList()
+    {
+        $snippets = $this->getSnippets();
+        $extensions = $snippets->map(function($snippet) { return $snippet->getExtension(); });
+
+        return array_unique($extensions->toArray());
+    }
 }
