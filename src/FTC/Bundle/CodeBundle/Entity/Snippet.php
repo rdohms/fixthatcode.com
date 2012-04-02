@@ -58,6 +58,13 @@ class Snippet
     protected $parent;
 
     /**
+     * @var string $diff
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $diff;
+
+    /**
      * @var \FTC\Bundle\CodeBundle\Entity\Comment $comment
      *
      * @ORM\OneToOne(targetEntity="Comment", inversedBy="snippet", cascade={"persist", "remove", "merge"})
@@ -191,5 +198,21 @@ class Snippet
     public function getExtension()
     {
         return pathinfo($this->getName(), PATHINFO_EXTENSION);
+    }
+
+    /**
+     * @param string $diff
+     */
+    public function setDiff($diff)
+    {
+        $this->diff = $diff;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiff()
+    {
+        return $this->diff;
     }
 }

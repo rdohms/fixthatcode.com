@@ -117,10 +117,21 @@ class CodeEntryInteractionController extends Controller
         $snippet->setComment($comment);
         $snippet->setName($parentSnippet->getName());
 
+        //Get Diff
+        $snippet->setDiff($this->generateDiff($parentSnippet->getCode(), $snippet->getCode()));
+
         $em->persist($snippet);
         $em->flush();
 
         $this->getFlashBag()->add('success', 'Your contribution has been added.');
         return $this->redirect($this->generateUrl('entry_show', array('id' => $id)));
+    }
+
+    public function generateDiff($parentCode, $currentCode)
+    {
+        $diff = new \Horde_Text_Diff('auto', array(explode(PHP_EOL, $parentCode), explode(PHP_EOL, $currentCode)));
+        $renderer = new \Horde_Text_Diff_Renderer_Unified();
+
+        return $renderer->render($diff);
     }
 }

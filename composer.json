@@ -12,7 +12,9 @@
         "psr-0": {
             "": "src/",
             "DMS": "vendor/dms/dms/src/"
-        }
+        },
+        "classmap": ["vendor/pear-horde"]
+
     },
 
     "require": {
@@ -39,7 +41,9 @@
 
         "ornicar/gravatar-bundle":          "dev-master",
 
-        "mopa/bootstrap-bundle":     "dev-master",
+        "mopa/bootstrap-bundle":            "dev-master",
+
+        "pear-horde/Horde_Text_Diff":       "*",
 
         "dms/dms":                          "dev-master"
 
@@ -58,6 +62,10 @@
                 },
                 "target-dir": "DMS"
             }
+        },
+        {
+            "type": "pear",
+            "url": "http://pear.horde.org"
         }
     ],
 
