@@ -17,27 +17,24 @@ var codeEditor = {
         editorSession.setUseWrapMode(true);
         editorSession.setMode(mode);
 
-        var size = editorSession.getValue().split("\n").length * 20 + 15;
-
-        $(divId).height(size);
-        $(divId+"-placeholder").height(size + 20);
-
-        editor.resize();
-
-        //TODO: this resize is not working, check it
         editorSession.on('change', function(){
-
-            var size = editorSession.getValue().split("\n").length * 20 + 15;
-
-            $(divId).height(size);
-            $(divId+"-placeholder").height(size + 20);
-
-            editor.resize();
-
+            codeEditor.resizeEditor(editor);
         });
 
-        this.loadedEditors.divId = editor;
+        this.resizeEditor(editor);
 
+        this.loadedEditors[divId] = editor;
+
+    },
+
+    resizeEditor: function(editor) {
+
+        var size = editor.getSession().getValue().split("\n").length * 20 + 15;
+
+        $("#"+editor.container.id).height(size);
+        $("#"+editor.container.id+"-placeholder").height(size + 20);
+
+        editor.resize();
     },
 
     wakeEditor: function(event) {
@@ -56,13 +53,13 @@ var codeEditor = {
         //append form
         $('#'+editorId+'-placeholder').after(html);
 
-        //set variables
-        //$('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
+        //Populate and hide code field
+        $('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
+        $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
 
         editor.setReadOnly(false);
-        editor.getSession().on('change', function(){
+        editor.getSession().on('change', function(x){
             $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
-            console.log(editor.getSession().getValue());
         });
     },
 
