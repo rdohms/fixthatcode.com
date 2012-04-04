@@ -29,6 +29,13 @@ class Snippet
     private $name;
 
     /**
+     * @var string $language
+     *
+     * @ORM\Column(name="language", type="string", length=10)
+     */
+    protected $language;
+
+    /**
      * @var string $code
      *
      * @ORM\Column(name="code", type="text")
@@ -197,7 +204,7 @@ class Snippet
      */
     public function getExtension()
     {
-        return pathinfo($this->getName(), PATHINFO_EXTENSION);
+        return pathinfo($this->getName(), PATHINFO_EXTENSION) ?: 'text';
     }
 
     /**
@@ -214,5 +221,21 @@ class Snippet
     public function getDiff()
     {
         return $this->diff;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

@@ -1,0 +1,42 @@
+{% macro syntaxHighlighterIncludeJs(languages) %}
+
+    <!-- Syntax Highlighter Base -->
+    <script src="/syntaxhighlighter/scripts/shCore.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- Syntax Highlighter Brushes -->
+    {% for language in languages %}
+        <script src="/syntaxhighlighter/scripts/shBrush{{ _self.convertToBrushFile(language) }}.js" type="text/javascript" charset="utf-8"></script>
+    {% endfor %}
+    
+{% endmacro %}
+{% macro syntaxHighlighterIncludeCss(theme) %}
+
+    <!-- Syntax Highlighter Base -->
+    <link rel="stylesheet" href="/syntaxhighlighter/styles/shCore.css" type="text/css">
+    
+    <!-- Syntax Highlighter Theme -->
+    <link rel="stylesheet" href="/syntaxhighlighter/styles/shTheme{{ theme }}.css" type="text/css">
+    
+{% endmacro %}
+
+{% macro convertToBrush(language) %}
+{% set toBrush = {
+    c_cpp: "cpp", clojure: "plain", coffee: "plain", coldfusion: "coldfusion", csharp: "csharp", css: "css", groovy: "groovy", 
+    haxe: "plain", html: "plain", java: "java", javascript: "javascript", json: "javascript", latex: "plain", lua: "plain", 
+    markdown: "plain", ocaml: "plain", perl: "plain", pgsql: "sql", php: "php", powershell: "powershell", python: "python", 
+    scala: "scala", scss: "sass", ruby: "ruby", sql: "sql", svg: "plain", text: "plain", xquery: "xml", textile: "plain", 
+    xml: "xml", sh: "bash", diff: "diff"
+} %}
+{% if toBrush[language] is defined %}{{ toBrush[language] }}{% else %}{{ "plain" }}{% endif %}
+{% endmacro %}
+
+{% macro convertToBrushFile(language) %}
+{% set toBrushFile = {
+        c_cpp: "Cpp", clojure: "Plain", coffee: "Plain", coldfusion: "Coldfusion", csharp: "CSharp", css: "Css", groovy: "Groovy", 
+        haxe: "Plain", html: "Plain", java: "Java", javascript: "JScript", json: "javascript", latex: "Plain", lua: "Plain", 
+        markdown: "Plain", ocaml: "Plain", perl: "Perl", pgsql: "Sql", php: "Php", powershell: "PowerShell", python: "Python", 
+        scala: "Scala", scss: "Sass", ruby: "ruby", sql: "Sql", svg: "Plain", text: "Plain", xquery: "Xml", textile: "Plain", 
+        xml: "Xml", sh: "Bash", diff: "Diff"
+} %}
+{% if toBrushFile[language] is defined %}{{ toBrushFile[language] }}{% else %}{{ "Plain" }}{% endif %}
+{% endmacro %}

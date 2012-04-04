@@ -32,7 +32,7 @@ var codeEditor = {
         var size = editor.getSession().getValue().split("\n").length * 20 + 15;
 
         $("#"+editor.container.id).height(size);
-        $("#"+editor.container.id+"-placeholder").height(size + 20);
+        $("#"+editor.container.id+"-placeholder").height(size);
 
         editor.resize();
     },
