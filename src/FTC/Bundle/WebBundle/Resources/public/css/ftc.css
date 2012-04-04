@@ -10,7 +10,7 @@
 
 .editor-placeholder{
     width: 0;
-    height: 315px
+    margin-bottom: 20px;
 }
 
 .editor-filename {

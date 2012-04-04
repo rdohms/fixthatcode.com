@@ -18,12 +18,13 @@
 		<form class="form-horizontal" action="{{ path('entry_snippet_create') }}" method="post" {{ form_enctype(form) }}>
 			{{ form_widget(form) }}
             <div class="control-group">
-                <div id="editor" class="span8 editor">&lt;?php
-
+                <div id="editor" class="span8 editor">
 /**
-* Add your code here
-*/
+ * Add your code here
+ * Any language, just go for it.
+ */
 </div>
+                <div id="editor-placeholder"></div>
             </div>
 	        <div class="form-actions-nomargin form-actions ">
 				<input type="submit" class="btn btn-primary" name="done" value="I'm done!" />
@@ -40,27 +41,44 @@
 {{ parent() }}
 <script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
-<script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
-<script src="/ace/mode-php-noconflict.js" type="text/javascript" charset="utf-8"></script>
-<script>
-window.onload = function() {
-    var editor = ace.edit("editor");
-    editor.setShowPrintMargin(false);
-    editor.setTheme("ace/theme/twilight");
-
-    var PhpMode = ace.require("ace/mode/php").Mode;
-    editor.getSession().setMode(new PhpMode());
-    
-    editor.getSession().on('change', function(){
-        $('#ftc_bundle_codebundle_snippettype_code').val( editor.getSession().getValue() );
-        console.log(editor.getSession().getValue());
-    });
-};
-</script>
+<script src="/ace/mode-text-noconflict.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
 $(document).ready(function(){
     $('#ftc_bundle_codebundle_snippettype_code').parent().parent().hide();
+    
+    var editor = ace.edit("editor");
+    editor.setShowPrintMargin(false);
+    editor.setTheme("ace/theme/twilight");
+
+    var textMode = ace.require("ace/mode/text").Mode;
+    editor.getSession().setMode(new textMode());
+    
+    var size = editor.getSession().getValue().split("\n").length * 20 + 15;
+    $("#"+editor.container.id).height(size);
+    $("#"+editor.container.id+"-placeholder").height(size + 20);
+    editor.resize();
+    
+    editor.getSession().on('change', function(){
+        $('#ftc_bundle_codebundle_snippettype_code').val( editor.getSession().getValue() );
+        
+        var size = editor.getSession().getValue().split("\n").length * 20 + 15;
+        $("#"+editor.container.id).height(size);
+        $("#"+editor.container.id+"-placeholder").height(size + 20);
+        editor.resize();
+    });
+    
+    $('#ftc_bundle_codebundle_snippettype_language').change( function() {
+       var lang, mode, fileref;
+       
+       lang = $(this).attr('value');
+       
+       $.getScript("/ace/mode-"+lang+"-noconflict.js", function() {
+           mode = ace.require("ace/mode/"+lang).Mode;
+           editor.getSession().setMode(new mode());
+       });
+       
+    });
 });
 </script>
 {% endblock %}

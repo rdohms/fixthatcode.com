@@ -4,6 +4,7 @@ namespace FTC\Bundle\CodeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
+use FTC\Bundle\CodeBundle\Entity\Choice\CodeLanguageChoices;
 
 class SnippetType extends AbstractType
 {
@@ -13,9 +14,16 @@ class SnippetType extends AbstractType
             ->add('name', 'text', array(
                 'attr'       => array('class' => 'span6', 'placeholder' => 'untitled.php'),
                 'label'      => 'Filename',
-                'help_block' => 'We will use this to offer language compatible highlighting below and for organization',
+                'help_block' => 'USe this so people can better grasp you code organizatio',
                 'empty_data' => 'untitled.php',
                 'required'   => false,
+            ))
+            ->add('language', 'choice', array(
+                'choice_list' => new CodeLanguageChoices(),
+                'attr'        => array('class' => 'span6'),
+                'label'       => "What language is it written in?",
+                'required'    => false,
+                'empty_value' => 'Choose a language',
             ))
             ->add('code')
         ;

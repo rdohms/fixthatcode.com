@@ -252,11 +252,56 @@ class CodeEntry
         return $this->comments;
     }
 
+    /**
+     * Retrieves a list of all the extensions of the files in the page
+     *
+     * @return array
+     */
     public function getExtensionList()
     {
         $snippets = $this->getSnippets();
         $extensions = $snippets->map(function($snippet) { return $snippet->getExtension(); });
 
         return array_unique($extensions->toArray());
+    }
+
+    /**
+     * Retrieves a list of all the languages in the entries snippets
+     *
+     * @return array
+     */
+    public function getLanguageList()
+    {
+        $snippets = $this->getSnippets();
+        $languages = $snippets->map(function($snippet) { return $snippet->getLanguage(); });
+
+        return array_unique($languages->toArray());
+    }
+
+    /**
+     * Get stats for the interactions of this code entry
+     *
+     * @return \stdClass
+     */
+    public function getInteractionStats()
+    {
+        $stats = new \stdClass();
+        $comments = $this->getComments();
+
+        $contributions = $comments->filter( function($comment) { return $comment->getSnippet() !== null; } );
+
+        $stats->total         = $comments->count();
+        $stats->comments      = $comments->count() - $contributions->count();
+        $stats->contributions = $contributions->count();
+
+        return $stats;
+    }
+
+    public function getInteractionAuthors()
+    {
+        $comments = $this->getComments();
+        $authors = $comments->map(function($comment) { return $comment->getAuthor(); });
+
+        return array_unique($authors->toArray());
     }
 }
