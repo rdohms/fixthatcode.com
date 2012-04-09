@@ -29,6 +29,13 @@ class Snippet
     private $name;
 
     /**
+     * @var string $language
+     *
+     * @ORM\Column(name="language", type="string", length=10)
+     */
+    protected $language;
+
+    /**
      * @var string $code
      *
      * @ORM\Column(name="code", type="text")
@@ -45,22 +52,29 @@ class Snippet
     /**
      * @var \FTC\Bundle\AuthBundle\Entity\User $author
      *
-     * @ORM\OneToOne(targetEntity="FTC\Bundle\AuthBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="FTC\Bundle\AuthBundle\Entity\User")
      */
     protected $author;
 
     /**
      * @var \FTC\Bundle\CodeBundle\Entity\Snippet $parent
      *
-     * @ORM\OneToOne(targetEntity="Snippet")
+     * @ORM\ManyToOne(targetEntity="Snippet")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $parent;
 
     /**
+     * @var string $diff
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $diff;
+
+    /**
      * @var \FTC\Bundle\CodeBundle\Entity\Comment $comment
      *
-     * @ORM\OneToOne(targetEntity="Comment")
+     * @ORM\OneToOne(targetEntity="Comment", inversedBy="snippet", cascade={"persist", "remove", "merge"})
      * @ORM\JoinColumn(nullable=true)
      */
     protected $comment;
@@ -135,5 +149,93 @@ class Snippet
         return $this->entry;
     }
 
+    /**
+     * @param \FTC\Bundle\AuthBundle\Entity\User $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
 
+    /**
+     * @return \FTC\Bundle\AuthBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param \FTC\Bundle\CodeBundle\Entity\Comment $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * @return \FTC\Bundle\CodeBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param \FTC\Bundle\CodeBundle\Entity\Snippet $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return \FTC\Bundle\CodeBundle\Entity\Snippet
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Returns the extension of a file
+     *
+     * @return string
+     */
+    public function getExtension()
+    {
+        return pathinfo($this->getName(), PATHINFO_EXTENSION) ?: 'text';
+    }
+
+    /**
+     * @param string $diff
+     */
+    public function setDiff($diff)
+    {
+        $this->diff = $diff;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiff()
+    {
+        return $this->diff;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
 }

@@ -29,9 +29,16 @@ class User extends FOSUser
     protected $fullname;
 
     /**
+     * @var string $bio
+     *
+     * @ORM\Column(name="bio", type="text")
+     */
+    protected $bio;
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -53,10 +60,26 @@ class User extends FOSUser
     /**
      * Get fullname
      *
-     * @return string 
+     * @return string
      */
     public function getFullname()
     {
         return $this->fullname;
+    }
+
+    /**
+     * @param string $bio
+     */
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBio()
+    {
+        return $this->bio;
     }
 }

@@ -1,4 +1,6 @@
 {% extends 'FTCWebBundle::layout.html.twig' %}
+{% import "FTCCodeBundle:Macro:ace.macro.twig" as ace %}
+{% import "FTCCodeBundle:Macro:syntaxhighlighter.macro.twig" as syntaxhighlighter %}
 
 {% block content %}
 <div class="row-fluid">
@@ -8,46 +10,56 @@
                 <span class="label label-info">{{ entry.getTargetUserTypeText() }}</span>
 
                 <h1 class="entry-title">
-                    {{ entry.title }} 
+                    {{ entry.title }}
                     <!-- TODO: only if owner -->
-                    <a href="{{ path('entry_edit', { 'id': entry.id }) }}" class="btn btn-mini"><i class="icon-pencil"></i></a>
+                    <a href="{{ path('entry_edit', { 'id': entry.id }) }}" class="btn btn-mini"><i class="icon-edit"></i></a>
                 </h1>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="span9">
                 <p>{{ entry.description|nl2br }}</p>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="span9 snippets">
                 {% for snippet in entry.snippets %}
                     <div class="well editor-filename">
                         <div class="row-fluid">
                             <div class="span10">
-                                <i class="icon-file"></i> {{ snippet.name }} (see latest | see top rated)                                
+                                <i class="icon-file"></i> {{ snippet.name }} (see latest | see top rated)
                             </div>
                             <div class="span2 right">
-                                <a href="#" class="btn btn-info btn-mini btn-edit-code" rel="editor{{ snippet.id }}"><i class="icon-pencil icon-white"></i>  fork and edit</a>
+                                <a href="{{ path('entry_snippet_contribute', { id: entry.id, snippetId: snippet.id}) }}" 
+                                   class="btn btn-info btn-mini btn-edit-code" rel="editor{{ snippet.id }}" {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}disabled="disabled"{% endif %} 
+                                       data-content="Click here to edit this code and suggest the changes to the author, your changes will be listed below as contributions." 
+                                       data-original-title="Make this code better!"
+                                       data-placement="top"
+                                   ><i class="icon-edit icon-white"></i>  edit this code</a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="editor{{ snippet.id }}" class="editor span9">{{ snippet.code }}</div>
-                    <div id="editor{{ snippet.id }}-placeholder" class="editor-placeholder"></div>             
+                    <div id="editor{{ snippet.id }}-placeholder" class="editor-placeholder"></div>
                 {% endfor %}
             </div>
         </div>
-        
+
         <div class="row-fluid">
             <div class="span8">
                 <h2>Reactions</h2>
             </div>
             <div class="span4 right">
-                <a href="#" class="btn btn-info"><i class="icon-comment icon-white"></i> comment</a>
-                <a href="#" class="btn btn-info"><i class="icon-pencil icon-white"></i> edit the code</a>
+                <a href="#comment-form" class="btn btn-info"><i class="icon-comment icon-white"></i> comment</a>
+                <a class="btn btn-info" rel="popover" 
+                    data-content="Make sure you are logged in and use the 'edit this code' button next to the snippet, your changes will be stored and added below for all to see." 
+                    data-original-title="Want to rewrite some of the code on this page?"
+                    data-placement="top">
+                    <i class="icon-edit icon-white"></i> edit the code
+                </a>
             </div>
         </div>
         <div class="row">
@@ -56,18 +68,45 @@
                     <div class="row-fluid comment">
                         <div class="span12">
                                 <a href="#">
-                                    <img src="{{ gravatar(comment.author.email, 20) }}" alt="{{comment.author.username}}"> 
+                                    <img src="{{ gravatar(comment.author.email, 20) }}" alt="{{comment.author.username}}">
                                     <strong>{{comment.author.fullname|default(comment.author.username)}}</strong>
                                 </a>
 
-                            commented on this code
+                           {% if comment.snippet %}contributed to this code{% else %}commented on this code{% endif %}
                         </div>
                     </div>
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="well">
-                                {{ comment.comment }}                                
+
+                                <div class="row-fluid comment-comment">
+                                    <div class="span12">
+                                        {{ comment.comment }}
+                                    </div>
+                                </div>
+                                
+                                {% if comment.snippet %}
+                                <div class="row-fluid comment-snippet">
+                                    <div class="span12">
+                                        <div class="row-fluid comment-snippet-controls">
+                                            <div class="span7">
+                                                <i class="icon-file"></i> {{ comment.snippet.name }}
+                                            </div>
+                                            <div class="span5 right">
+                                                <button class="btn btn-mini btn-info comment-snippet-toggle" rel="snippet{{comment.snippet.id}}">see code</button>
+                                            </div>
+                                        </div>
+                                        <div id="snippet{{comment.snippet.id}}-diff" class="row-fluid comment-snippet-diff">
+                                            <pre class="span12 brush: diff; toolbar: true;" >{{ comment.snippet.diff }}</pre>
+                                        </div>
+                                        <div id="snippet{{comment.snippet.id}}-code" class="row-fluid comment-snippet-code">
+                                            <pre class="span12 brush: {{ syntaxhighlighter.convertToBrush(comment.snippet.language) }}; toolbar: true;" >{{ comment.snippet.code }}</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
                             </div>
+
                         </div>
                     </div>
                 {% else %}
@@ -77,7 +116,9 @@
         </div>
         <div class="row">
             <div class="span9">
-                <h4>Comment on this code:</h4>
+                <h4><a name="comment-form"></a>Comment on this code:</h4>
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <form class="form-horizontal form-nolabels" action="{{ path("entry_comment_create", {id: entry.id}) }}" method="post" {{ form_enctype(comment_form) }}>
                     {{ form_widget(comment_form) }}
                     <div class="form-actions-nomargin">
@@ -85,139 +126,107 @@
                         <button type="reset" class="btn">Cancel</button>
                     </div>
                 </form>
+                {% else %}
+                <div class="alert alert-block">
+                  Please <a href="{{ path('login') }}">Login</a> or <a href="{{ path('fos_user_registration_register') }}">Register</a> to leave a comment.
+                </div>
+                {% endif %}
+
+
             </div>
         </div>
     </div>
-    
+
     <div class="span3 sidebar">
         <div class="row-fluid profile">
             <div class="span8">
                 <h3>{{ entry.author.fullName }}</h3>
-                <p>Developer, gamer, lover of awesome code.</p>
+                <p>{{entry.author.bio}}</p>
             </div>
             <div class="span4">
                 <img src="{{ gravatar(entry.author.email, 85) }}" alt="">
+                <ul class="nav nav-list">
+                  <li><a href="{{ path("user_profile", {id: entry.author.id}) }}" title="View {{ entry.author.fullname }}'s Profile"><i class="icon-user"></i> Profile</a></li>
+                </ul>
             </div>
         </div>
         <div class="row-fluid">
             <div class="span12">
                 <h3>Stats</h3>
                 
+                {% set stats = entry.getInteractionStats() %}
+                
                 <dl class="stats">
-                    <dt>12</dt>
+                    <dt>{{ stats.comments }} </dt>
                     <dd>Comments</dd>
-                    
-                    <dt>12</dt>
-                    <dd>Forks</dd>
+
+                    <dt>{{ stats.contributions }}</dt>
+                    <dd>Contributions</dd>
                 </dl>
             </div>
         </div>
         <div class="row-fluid">
             <div class="span12">
                 <h3>Participants</h3>
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
-                <img src="{{ gravatar(entry.author.email, 32) }}" alt="">
+                {% for author in entry.getInteractionAuthors() %}
+                    <a href="{{ path("user_profile", {id: author.id}) }}" title="View {{ author.fullname }}'s Profile"><img src="{{ gravatar(author.email, 32) }}" alt="{{ author.fullname }}"></a>
+                {% endfor %}
             </div>
         </div>
     </div>
-    
+
 </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ syntaxhighlighter.syntaxHighlighterIncludeCss('RDark')}}
 {% endblock %}
 
 {% block javascripts %}
 {{parent()}}
-<script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
-<script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
-<script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
-<script src="/ace/mode-php-noconflict.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+<script src="/bundles/ftccode/js/code-editor.js" type="text/javascript" charset="utf-8"></script>
+<script src="/bundles/ftccode/js/code-comments.js" type="text/javascript" charset="utf-8"></script>
+
+{{ ace.aceEditorIncludeJs('twilight', entry.getLanguageList()) }}
+{{ syntaxhighlighter.syntaxHighlighterIncludeJs(entry.getLanguageList()|merge({diff: 'diff'})) }}
+
 <script type="text/javascript" charset="utf-8">
-    var editors = {};
-</script>
-{% for snippet in entry.snippets %}
-    
-    <script>
     $(document).ready(function(){
-        editors.editor{{snippet.id}} = new ace.edit("editor{{ snippet.id }}");
-        editors.editor{{snippet.id}}.setShowPrintMargin(false);
-        editors.editor{{snippet.id}}.setTheme("ace/theme/twilight");
-        editors.editor{{snippet.id}}.setReadOnly(true);
-        editors.editor{{snippet.id}}.getSession().setUseWrapMode(true);
 
-        var PhpMode = ace.require("ace/mode/php").Mode;
-        editors.editor{{snippet.id}}.getSession().setMode(new PhpMode());
-        
-        size = editors.editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
-        $("#editor{{ snippet.id }}").height(size);
-        $("#editor{{ snippet.id }}-placeholder").height(size + 20);
-        editors.editor{{snippet.id}}.resize();
-        
-        editors.editor{{snippet.id}}.getSession().on('change', function(){
-            size = editors.editor{{snippet.id}}.getSession().getValue().split("\n").length * 20 + 15;
-            $("#editor{{ snippet.id }}").height(size);
-            $("#editor{{ snippet.id }}-placeholder").height(size + 20);
-            editors.editor{{snippet.id}}.resize();
-        });
-    });
-    </script>
+        //Request editors
+        {% for snippet in entry.snippets %}
+            codeEditor.requestedEditors.push({id: "editor{{snippet.id}}", mode: new {{snippet.language|default("text")}}Mode()});
+        {% endfor %}
 
-{% endfor %}
+        //Load Editors
+        codeEditor.loadPageEditors();
 
-
-<script type="text/javascript">
-    
-    var wakeEditor = function(event) {
-        
-        var $btn, editorId, data, html;
-        
-        $btn     = $(event.currentTarget);
-        editorId = $btn.attr('rel')
-        
-        data     = { nodeId: editorId+'-form' }
-        
-        //get template
-        html = $.tmpl( "editCodeForm", data );
-                
-        //append form
-        $('#'+editorId+'-placeholder').after(html);
-        
-        //set variables
-        $('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
-        
-        editors[editorId].setReadOnly(false);
-    }
-    
-    $(document).ready( function() {
-    
+        //Enable Edit buttons
         $.template( "editCodeForm", $("#edit-code-form").html() );
-        $('.btn-edit-code').on('click', wakeEditor);
+        $('.btn-edit-code').on('click', codeEditor.wakeEditor).popover();
         
+        SyntaxHighlighter.all();
+        
+        codeComments.loadToggleButtons(".comment-snippet-toggle");
+        
+        $("a[rel=popover]").popover().click(function(e) { e.preventDefault() });
     });
 </script>
 
 <script type="text/template" id="edit-code-form">
-<div id="${nodeId}" class="row code-comment-form-row">
-    <div class="span9 code-comment-form">
-        <form class="form-horizontal form-nolabels" action="{{ path('entry_snippet_create') }}" method="post" {{ form_enctype(contrib_form) }}>
-            {{ form_widget(contrib_form) }}
-            <div class="form-actions-nomargin form-actions ">
-                <input type="submit" class="btn btn-primary" name="done" value="Submit changes" />
-                <button type="reset" class="btn">Cancel</button>
-            </div>
-        </form>
+    <div id="${nodeId}" class="row code-comment-form-row">
+        <div class="span9 code-comment-form">
+            <form class="form-horizontal form-nolabels" action="${formAction}" method="post" {{ form_enctype(contrib_form) }}>
+                {{ form_widget(contrib_form) }}
+                <div class="form-actions-nomargin form-actions ">
+                    <input type="submit" class="btn btn-primary" name="done" value="Submit changes" />
+                    <button type="reset" class="btn btn-reset">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 {% endblock %}
