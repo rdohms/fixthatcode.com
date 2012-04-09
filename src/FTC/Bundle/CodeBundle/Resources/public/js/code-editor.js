@@ -42,6 +42,8 @@ var codeEditor = {
 
         event.preventDefault();
 
+        codeEditor.sleepAllEditors();
+
         $btn     = $(event.currentTarget);
         editorId = $btn.attr('rel');
         editor   = codeEditor.loadedEditors[editorId];
@@ -54,13 +56,22 @@ var codeEditor = {
         $('#'+editorId+'-placeholder').after(html);
 
         //Populate and hide code field
-        $('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
+        //$('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
         $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
+        $('.btn-reset').on('click', codeEditor.sleepAllEditors);
 
         editor.setReadOnly(false);
         editor.getSession().on('change', function(x){
             $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
         });
+    },
+
+    sleepAllEditors: function() {
+        $('.code-comment-form-row').remove();
+    },
+
+    sleepEditor: function(event) {
+
     },
 
     loadPageEditors: function() {
