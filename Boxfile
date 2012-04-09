@@ -1,5 +1,13 @@
 web1:
-	document_root: web
-	
+    name: fixthatcode
+    shared_writable_dirs:
+      - app/cache
+      - app/logs
+    document_root: web
+    php_version: 5.3.8
+    php_extensions:
+      - mysql
+      - gd
+      - intl
     after_build:
-    	- "php bin/composer.phar install"
+        - "php bin/composer.phar install"
