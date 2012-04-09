@@ -1,0 +1,13 @@
+{% macro aceEditorIncludeJs(theme, modes) %}
+    
+    <!-- Ace Editor Base -->
+    <script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/ace/theme-{{ theme }}-noconflict.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- AceEditor Modes -->
+    {% for mode in modes %}
+        <script src="/ace/mode-{{ mode }}-noconflict.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8"> var {{ mode }}Mode = ace.require("ace/mode/{{ mode }}").Mode; </script>
+    {% endfor %}
+    
+{% endmacro %}
