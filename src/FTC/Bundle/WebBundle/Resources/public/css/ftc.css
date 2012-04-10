@@ -85,9 +85,18 @@ footer { margin-top: 35px; }
 .code-comment-form form { margin-bottom: 0; }
 .code-comment-form-row {margin-top: -20px; }
 
-.comment-comment { margin-bottom: 10px }
+.comment-comment { margin-bottom: 10px;}
 
 .comment-snippet-controls { margin-bottom: -10px }
 .comment-snippet-diff .syntaxhighlighter{ padding: 8px 0; }
 .comment-snippet-code { display:none }
 .comment-snippet-code .syntaxhighlighter{ padding: 8px 0; }
+
+.category-header { font-size: 140% }
+.category-entry-list { margin-top: 8px; margin-bottom: 30px  }
+
+.category-improvecode { background-color: #F89406; }
+.category-betterperformance { background-color: #416e96; }
+.category-codinghorror { background-color: #B94A48; }
+.category-feedback { }
+.category-challenge { }
