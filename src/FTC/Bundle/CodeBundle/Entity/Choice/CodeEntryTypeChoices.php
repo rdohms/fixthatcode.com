@@ -51,4 +51,13 @@ class CodeEntryTypeChoices extends SimpleChoiceList
         return $this->reasons[$key];
     }
 
+    /**
+     * Get a list of the code categories focused on target users
+     *
+     * @return array
+     */
+    public function getTargetUserChoices()
+    {
+        return $this->reasons;
+    }
 }
