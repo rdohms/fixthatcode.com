@@ -1,0 +1,6 @@
+services:
+
+    ftc_code.entry:
+        class: FTC\Bundle\CodeBundle\Service\CodeEntryService
+        arguments:
+            entity_manager: @doctrine.orm.entity_manager
