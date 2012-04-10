@@ -1,0 +1,19 @@
+{% extends 'FTCWebBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <h2>Code Entries</h2>
+        <ul class="unstyled">
+            {% for entry in entries %}
+                <li>
+                    <p><a href="{{ path("entry_show", {id: entry.id}) }}">{{ entry.title }}</a></p>
+                    <p>{{ entry.description }}</p>
+                </li>                   
+            {% else %}
+                    <li>No entries yet, <a href="#">create one</a>.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -4,9 +4,48 @@
 
 <div class="row">
 	<div class="span12">
-		<p>Index Page</p>
+        <div class="hero-unit">
+          <h1>Fix That Code</h1>
+          <p>Collaborative code refactoring</p>
+          <p>Coding is an art, there are many ways of painting an apple, but which is better? Most of the code we write
+              everyday can be written in better ways to achieve different objectives, sometimes all it takes is a 
+              different set of eyes on it. Code quality also has various markers that can be validated, and you
+              usually do not have the time to see them, or are too caught up in the moment to see it.</p>
+          <p>That's where <strong>FixThatCode.com</strong> steps in. Its a place where you can get feedback on your
+              code, challenge other developers to improve it, work out ideas, in general just collaborative discuss
+              or rewrite a piece of code. It allows you show pieces of bad code you find, but to also fix these and
+              teach people how to not repeat those mistakes. Come on in and help us make code better.</p>
+        </div>
 	</div>	
 </div>
 
+<div class="row-fluid">
+    
+    {% for key, category in categories %}
+        <div class="span4">
+            <span class="label category-header category-{{ key }}">{{ category }}</span><span> <a href="{{ path('entry_type_list', {slug: key}) }}" title="see more.."> <i class="icon-search"></i></a></span>
+            <ul class="unstyled category-entry-list">
+                {% if entries[key] is defined %}
+                    {% for entry in entries[key] %}
+                        <li>
+                            <p><a href="{{ path("entry_show", {id: entry.id}) }}">{{ entry.title }}</a></p>
+                            <p>{{ entry.description[0:150] }}...</p>
+                        </li>                   
+                    {% endfor %}
+                {% else %}
+                    <li>No entries yet, <a href="#">create one</a>.</li>
+                {% endif %}
+            </ul>
+        </div>
+        
+        {% if loop.index == 3 %}
+        </div>
+        <div class="row-fluid">
+        {% endif %}
+        
+    {% endfor %}
+    
+
+</div>
 {% endblock %}
 
