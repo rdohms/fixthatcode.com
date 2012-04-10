@@ -21,6 +21,6 @@ This is the repository for the Fix That Code project.
 
 5. Setup Database
 
-    app/console doctrine:schema:generate
+    app/console doctrine:schema:create
 
 6. Fire it up!
