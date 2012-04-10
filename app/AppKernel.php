@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new FTC\Bundle\WebBundle\FTCWebBundle(),
             new FTC\Bundle\AuthBundle\FTCAuthBundle(),
             new FTC\Bundle\CodeBundle\FTCCodeBundle(),
+            new FTC\Bundle\CoreBundle\FTCCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

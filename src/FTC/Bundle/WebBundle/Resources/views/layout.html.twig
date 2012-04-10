@@ -12,11 +12,11 @@
 	<nav class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#">{% block brand %}Fix That Code!{% endblock %}</a>
+				<a class="brand" href="{{ path("home") }}">{% block brand %}Fix That Code!{% endblock %}</a>
 			
 					{% block nav_content %}
 					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="{{ path("home") }}">Home</a></li>
 					</ul>
 					{% endblock %}
 				

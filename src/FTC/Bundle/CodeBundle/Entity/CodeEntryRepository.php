@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CodeEntryRepository extends EntityRepository
 {
+
+    public function getLatest($max = 10)
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->orderBy('e.dateSubmited');
+        $qb->setMaxResults($max);
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
