@@ -3,11 +3,42 @@ web1:
     shared_writable_dirs:
       - app/cache
       - app/logs
+    
     document_root: web
+    default_gateway: app.php
+    index_list: [app.php]
+    
     php_version: 5.3.8
     php_extensions:
-      - mysql
-      - gd
-      - intl
+        - intl
+        - mbstring
+        - xsl
+        - apc
+        - mysql
+        - pdo_mysql
+        - zip
     after_build:
+        - "echo 'parameters:' >> app/config/parameters.yml"
+        - "echo '  database_driver:   pdo_mysql' >> app/config/parameters.yml"
+        - "echo '  database_host:     %database.host%' >> app/config/parameters.yml"
+        - "echo '  database_port:     3306' >> app/config/parameters.yml"
+        - "echo '  database_name:     %database.name%' >> app/config/parameters.yml"
+        - "echo '  database_user:     %database.user%' >> app/config/parameters.yml"
+        - "echo '  database_password: %database.password%' >> app/config/parameters.yml"
+        - "echo '  mailer_transport:  smtp' >> app/config/parameters.yml"
+        - "echo '  mailer_host:       localhost' >> app/config/parameters.yml"
+        - "echo '  mailer_user:       ~' >> app/config/parameters.yml"
+        - "echo '  mailer_password:   ~' >> app/config/parameters.yml"
+        - "echo '  locale:            en' >> app/config/parameters.yml"
+        - "echo '  secret:            87f2671fe0f483a5571f55211107764c0e66df6c' >> app/config/parameters.yml"
         - "php bin/composer.phar install"
+    before_deploy:
+        - "php app/console doctrine:schema:update --force"
+
+db1:
+    type: mysql
+        
+global:
+    env:
+        - APP_NAME: fixthatcode
+        - ENV: dev

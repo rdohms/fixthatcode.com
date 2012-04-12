@@ -1,5 +1,5 @@
 {
-    "hash": "c1cf3f056c60c9d187f155eada6edc66",
+    "hash": "f27e8d914b920db28fb037c6ddf9177c",
     "packages": [
         {
             "package": "dms/dms",
@@ -17,7 +17,7 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "50ee2c81bc7d0f413f402de46ecedfd98b79b4f3"
+            "source-reference": "dd3d35dd28e864fb908a70f8b206d1209aa2c333"
         },
         {
             "package": "doctrine/orm",
@@ -26,7 +26,7 @@
         {
             "package": "friendsofsymfony/user-bundle",
             "version": "dev-master",
-            "source-reference": "b706553b4f7784c56398088a0d050bd92dd6c4ac"
+            "source-reference": "6a892843f97d89ac7ef3d2b97c23c07076f7b7da"
         },
         {
             "package": "jms/aop-bundle",
@@ -43,12 +43,12 @@
         {
             "package": "jms/security-extra-bundle",
             "version": "dev-master",
-            "source-reference": "a636402a8cb1893202f6f67231923cd36ef96e60"
+            "source-reference": "b564463433aed66e9dddad8cbb761afff5a80cb4"
         },
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "2634d29cc193981761e3daf28e1afc6358bb43b1"
+            "source-reference": "eb3b5eb732e5f172d5aa12dea0af36b7989c18b3"
         },
         {
             "package": "monolog/monolog",
@@ -57,7 +57,7 @@
         {
             "package": "mopa/bootstrap-bundle",
             "version": "dev-master",
-            "source-reference": "ced50a352d8796ada4d5449c290b8ea82b1db57f"
+            "source-reference": "978008c9869166616878b4d81a55611748c85d90"
         },
         {
             "package": "ornicar/gravatar-bundle",
@@ -66,7 +66,7 @@
         },
         {
             "package": "pear-horde/Horde_Exception",
-            "version": "1.0.8"
+            "version": "1.0.9"
         },
         {
             "package": "pear-horde/Horde_Text_Diff",
@@ -74,11 +74,11 @@
         },
         {
             "package": "pear-horde/Horde_Translation",
-            "version": "1.0.1"
+            "version": "1.0.2"
         },
         {
             "package": "pear-horde/Horde_Url",
-            "version": "1.0.0"
+            "version": "1.0.1"
         },
         {
             "package": "pear-horde/Horde_Util",
@@ -87,12 +87,12 @@
         {
             "package": "sensio/distribution-bundle",
             "version": "dev-master",
-            "source-reference": "e78f65f36b27ba07b1e44241b4cf5443e80d7bd5"
+            "source-reference": "38be63ebb45cc1fbeaff3f2bdf6d0ed216305a24"
         },
         {
             "package": "sensio/framework-extra-bundle",
             "version": "dev-master",
-            "source-reference": "7e1e52a241558264253179bb790f4c5d25544fb4"
+            "source-reference": "94a9615c6e52a3d02ca7f44eee56f20e0c5c4622"
         },
         {
             "package": "sensio/generator-bundle",
@@ -106,7 +106,7 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "source-reference": "b9cff021abc3d9433a892fa9908d9856393c0d09"
+            "source-reference": "a771e48366d80002b0046ba43e658d067170634d"
         },
         {
             "package": "symfony/monolog-bundle",
@@ -126,17 +126,19 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "d6330e1bb34211b0b52391271d6c7dfb5ad0c213",
+            "source-reference": "b2af6b4f2410d6e6d7cb3a85b8fe26080eb31cf7",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
             "package": "twig/extensions",
             "version": "dev-master",
-            "source-reference": "1dfff8e793f50f651c4f74f796c2c68a4aee3147"
+            "source-reference": "4c831657215e51568fcb31bb9142e827f9a69bd5"
         },
         {
             "package": "twig/twig",
-            "version": "1.6.3"
+            "version": "dev-master",
+            "source-reference": "4e28408ce1fced95251e5f8c8299aa43e9f40f4d",
+            "alias": "1.7.9999999.9999999-dev"
         }
     ],
     "aliases": []
