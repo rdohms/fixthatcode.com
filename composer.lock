@@ -1,5 +1,5 @@
 {
-    "hash": "f27e8d914b920db28fb037c6ddf9177c",
+    "hash": "57cf7b52292e891b90e3285db87d86ce",
     "packages": [
         {
             "package": "dms/dms",
@@ -8,11 +8,11 @@
         },
         {
             "package": "doctrine/common",
-            "version": "2.2.1"
+            "version": "2.2.2"
         },
         {
             "package": "doctrine/dbal",
-            "version": "2.2.1"
+            "version": "2.2.2"
         },
         {
             "package": "doctrine/doctrine-bundle",
@@ -57,7 +57,7 @@
         {
             "package": "mopa/bootstrap-bundle",
             "version": "dev-master",
-            "source-reference": "978008c9869166616878b4d81a55611748c85d90"
+            "source-reference": "20812b3dafa9c3c587d623ac4a96175d09cf98f5"
         },
         {
             "package": "ornicar/gravatar-bundle",
@@ -106,7 +106,7 @@
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "source-reference": "a771e48366d80002b0046ba43e658d067170634d"
+            "source-reference": "d370e914e86518e88aa00ab266796ee032b8262e"
         },
         {
             "package": "symfony/monolog-bundle",
@@ -126,7 +126,7 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "b2af6b4f2410d6e6d7cb3a85b8fe26080eb31cf7",
+            "source-reference": "d2fd9ce7b91a477f81eab8076a8e63f528b5d41e",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
