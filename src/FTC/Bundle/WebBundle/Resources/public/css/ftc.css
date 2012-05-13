@@ -8,6 +8,14 @@
     margin-left: 0;
 }
 
+.editor.span9{
+    width: 70%;
+}
+
+.row-fluid .editor{
+    margin-left: 0;
+}
+
 .editor-placeholder{
     width: 0;
     margin-bottom: 20px;
