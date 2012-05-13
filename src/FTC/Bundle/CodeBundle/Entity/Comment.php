@@ -3,6 +3,7 @@
 namespace FTC\Bundle\CodeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * FTC\Bundle\CodeBundle\Entity\Comment
@@ -49,6 +50,22 @@ class Comment
      * @ORM\JoinColumn(nullable=true)
      */
     protected $snippet;
+
+    /**
+     * @var ArrayCollection $votes
+     *
+     * @ORM\OneToMany(targetEntity="Vote", mappedBy="comment")
+     */
+    protected $votes;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -127,5 +144,32 @@ class Comment
     public function getSnippet()
     {
         return $this->snippet;
+    }
+
+    /**
+     * Returns a summary of the votes up/down/total
+     *
+     * @return \stdClass
+     */
+    public function getVoteSum()
+    {
+        $votesStats = new \stdClass();
+        $votesStats->up    = 0;
+        $votesStats->down  = 0;
+        $votesStats->total = 0;
+
+        $counter = function ($vote) use ($votesStats) {
+            if ($vote->getValue()) {
+                $votesStats->up++;
+            } else {
+                $votesStats->down++;
+            }
+
+            $votesStats->total += $vote->getValue();
+        };
+
+        $this->votes->map($counter);
+
+        return $votesStats;
     }
 }
