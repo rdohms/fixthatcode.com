@@ -5,8 +5,8 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span9">
-        <div class="row">
-            <div class="span9">
+        <div class="row-fluid">
+            <div class="span12">
                 <span class="label label-info">{{ entry.getTargetUserTypeText() }}</span>
 
                 <h1 class="entry-title">
@@ -17,14 +17,14 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="span9">
+        <div class="row-fluid">
+            <div class="span12">
                 <p>{{ entry.description|nl2br }}</p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="span9 snippets">
+        <div class="row-fluid">
+            <div class="span12 snippets">
                 {% for snippet in entry.snippets %}
                     <div class="well editor-filename">
                         <div class="row-fluid">
@@ -62,8 +62,8 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="span9">
+        <div class="row-fluid">
+            <div class="span12">
                 {% for comment in entry.comments %}
                     <div class="row-fluid comment">
                         <div class="span8">
@@ -120,8 +120,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="row">
-            <div class="span9">
+        <div class="row-fluid">
+            <div class="span12">
                 <h4><a name="comment-form"></a>Comment on this code:</h4>
 
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
