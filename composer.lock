@@ -1,5 +1,5 @@
 {
-    "hash": "57cf7b52292e891b90e3285db87d86ce",
+    "hash": "932dc3386527a954865571cf9770712b",
     "packages": [
         {
             "package": "dms/dms",
@@ -44,6 +44,11 @@
             "package": "jms/security-extra-bundle",
             "version": "dev-master",
             "source-reference": "b564463433aed66e9dddad8cbb761afff5a80cb4"
+        },
+        {
+            "package": "jms/serializer-bundle",
+            "version": "dev-master",
+            "source-reference": "6bf2f092449c7104e6d9327de029cc3f5d2e3385"
         },
         {
             "package": "kriswallsmith/assetic",
@@ -126,7 +131,7 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "d2fd9ce7b91a477f81eab8076a8e63f528b5d41e",
+            "source-reference": "45d43d325a3849a8b8d5358a396cedb01b410a46",
             "alias": "2.1.9999999.9999999-dev"
         },
         {

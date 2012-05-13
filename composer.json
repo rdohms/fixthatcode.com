@@ -36,6 +36,7 @@
         "sensio/generator-bundle":          "dev-master",
 
         "jms/security-extra-bundle":        "dev-master",
+        "jms/serializer-bundle":            "dev-master",
 
         "friendsofsymfony/user-bundle":     "dev-master",
 

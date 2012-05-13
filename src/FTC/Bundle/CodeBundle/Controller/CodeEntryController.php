@@ -56,7 +56,7 @@ class CodeEntryController extends Controller
             throw $this->createNotFoundException('We were unable to find this entry.');
         }
 
-        $commentForm    = $this->createForm(new CommentType() );
+        $commentForm    = $this->createForm(new CommentType());
         $contributeForm = $this->createForm(new ContributeToSnippetType());
 
         return array(

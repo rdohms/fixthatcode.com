@@ -1,3 +1,8 @@
+FTCApiBundle:
+    resource: "@FTCApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 FTCCodeBundle:
     resource: "@FTCCodeBundle/Controller/"
     type:     annotation

@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
 
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new FOS\UserBundle\FOSUserBundle(),
@@ -28,6 +29,7 @@ class AppKernel extends Kernel
             new FTC\Bundle\AuthBundle\FTCAuthBundle(),
             new FTC\Bundle\CodeBundle\FTCCodeBundle(),
             new FTC\Bundle\CoreBundle\FTCCoreBundle(),
+            new FTC\Bundle\ApiBundle\FTCApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

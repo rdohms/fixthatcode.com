@@ -1,0 +1,5 @@
+services:
+    ftc_api.json_responder:
+        class: FTC\Bundle\ApiBundle\Service\JsonResponder
+        arguments:
+            serializer: @serializer
