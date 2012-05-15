@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FTC\Bundle\CodeBundle\Entity\Vote
  *
- * @ORM\Table()
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="unique_votes", columns={"comment_id", "user_id"})})
  * @ORM\Entity(repositoryClass="FTC\Bundle\CodeBundle\Entity\VoteRepository")
  */
 class Vote
@@ -41,6 +41,7 @@ class Vote
      * @ORM\ManyToOne(targetEntity="Comment", inversedBy="votes")
      */
     protected $comment;
+
     /**
      * Get id
      *
