@@ -60,8 +60,10 @@
                 <h2>Reactions</h2>
             </div>
             <div class="span4 right">
-                <a href="#comment-form" class="btn btn-info"><i class="icon-comment icon-white"></i> comment</a>
-                <a class="btn btn-info" rel="popover" 
+                <a href="#comment-form" class="btn btn-info" {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}disabled="disabled"{% endif %}>
+                    <i class="icon-comment icon-white"></i> comment
+                </a>
+                <a class="btn btn-info" rel="popover" {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}disabled="disabled"{% endif %}
                     data-content="Make sure you are logged in and use the 'edit this code' button next to the snippet, your changes will be stored and added below for all to see." 
                     data-original-title="Want to rewrite some of the code on this page?"
                     data-placement="top">
@@ -219,7 +221,17 @@
 
         //Enable Edit buttons
         $.template( "editCodeForm", $("#edit-code-form").html() );
-        $('.btn-edit-code').on('click', codeEditor.wakeEditor).popover();
+        $('.btn-edit-code').on('click', function(e) {
+            e.preventDefault();
+            
+            $a = $(e.currentTarget);
+            
+            if ($a.attr("disabled") != "disabled") {
+                codeEditor.wakeEditor(e)
+            } 
+            });
+        $('.btn-edit-code:disabled').attr('href', '');
+        $('.btn-edit-code').popover();
         
         SyntaxHighlighter.all();
         
