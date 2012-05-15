@@ -8,8 +8,9 @@
     margin-left: 0;
 }
 
-.editor.span9{
-    width: 70%;
+.editor.main{
+    width:869px;
+    margin-left: 0px;
 }
 
 .row-fluid .editor{
@@ -72,6 +73,8 @@ h1.entry-title{ margin-bottom: 18px; }
 .right { text-align: right; }
 
 .profile h3{ margin-top: 0px; }
+
+.profile-links > li > a {padding: 3px 10px;} 
 
 footer { margin-top: 35px; }
 

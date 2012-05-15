@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class VoteController extends BaseController
 {
     /**
-     * @Route("/{vote}/comment/{id}")
+     * @Route("/{vote}/comment/{id}", name="api_vote_comment")
      * @Template()
      *
      * @param string $vote
@@ -32,15 +32,27 @@ class VoteController extends BaseController
                 return $this->getResponder()->get404Response();
             }
 
-            $vote = new Vote();
-            $vote->setComment($comment);
-            $vote->setValue( ($vote == 'up')? 1:-1 );
-            $vote->setUser($this->getUser());
+            /** @var $voteRepository \FTC\Bundle\CodeBundle\Entity\VoteRepository */
+            $voteRepository = $this->getDoctrine()->getManager()->getRepository('FTCCodeBundle:Vote');
+            $commentVote = $voteRepository->getExistingVote($comment, $this->getUser());
+
+            if ($commentVote == null) {
+
+                $commentVote = new Vote();
+                $commentVote->setComment($comment);
+                $commentVote->setUser($this->getUser());
+
+            }
+
+            $commentVote->setValue( ($vote == 'up')? 1:-1 );
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($vote);
+            $entityManager->persist($commentVote);
+            $entityManager->flush();
 
-            $content = array('vote' => $vote);
+            $entityManager->refresh($comment);
+
+            $content = array('vote' => $commentVote, 'totals' => (array) $comment->getVoteSum());
             return $this->getResponder()->getSuccessResponse($content);
 
         } catch (\Exception $e) {
