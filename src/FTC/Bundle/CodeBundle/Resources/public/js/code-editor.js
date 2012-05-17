@@ -56,7 +56,7 @@ var codeEditor = {
         $('#'+editorId+'-placeholder').after(html);
 
         //Populate and hide code field
-        //$('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
+        $('#ftc_bundle_codebundle_contributetype_code').parents(".control-group:first").hide();
         $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
         $('.btn-reset').on('click', codeEditor.sleepAllEditors);
 
@@ -64,6 +64,8 @@ var codeEditor = {
         editor.getSession().on('change', function(x){
             $('#ftc_bundle_codebundle_contributetype_code').val( editor.getSession().getValue() );
         });
+        
+        editor.focus();
     },
 
     sleepAllEditors: function() {
