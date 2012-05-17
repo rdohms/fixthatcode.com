@@ -92,9 +92,13 @@ footer { margin-top: 35px; }
 .stats dd { }
 
 .code-comment-form { background-color: #E8E8E8; margin-bottom: 18px; padding-top: 15px;}
-.code-comment-form .form-actions { background-color: #E8E8E8; margin: 0; padding: 10px 5px;}
+.code-comment-form .form-actions { background-color: #E8E8E8; margin: 0 0 0 15px; padding: 10px 5px;}
 .code-comment-form form { margin-bottom: 0; }
 .code-comment-form-row {margin-top: -20px; }
+.code-comment-textarea { margin-left: 15px; width: 95%;}
+.code-comment-form-actions { margin-left: 15px; }
+
+.comment-form .form-actions { text-align: right;}
 
 .comment-comment { margin-bottom: 10px;}
 

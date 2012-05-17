@@ -12,7 +12,7 @@ class ContributeToSnippetType extends AbstractType
         $builder
             ->add('comment', 'textarea', array(
                 'label_render' => false,
-                'attr'         => array('class' => 'span9', 'placeholder' => 'Refactored code to achieve more speed...'),
+                'attr'         => array('class' => 'code-comment-textarea', 'placeholder' => 'Refactored code to achieve more speed...'),
                 'required'     =>false
             ))
             ->add('code', 'textarea', array('label_render' => false))

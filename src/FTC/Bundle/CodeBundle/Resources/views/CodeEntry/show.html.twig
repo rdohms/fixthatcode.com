@@ -11,8 +11,9 @@
 
                 <h1 class="entry-title">
                     {{ entry.title }}
-                    <!-- TODO: only if owner -->
+                    {% if app.user == entry.author %}
                     <a href="{{ path('entry_edit', { 'id': entry.id }) }}" class="btn btn-mini"><i class="icon-edit"></i></a>
+                    {% endif %}
                 </h1>
             </div>
         </div>
@@ -130,14 +131,14 @@
             </div>
         </div>
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span12 comment-form">
                 <h4><a name="comment-form"></a>Comment on this code:</h4>
 
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <form class="form-horizontal form-nolabels" action="{{ path("entry_comment_create", {id: entry.id}) }}" method="post" {{ form_enctype(comment_form) }}>
                     {{ form_widget(comment_form) }}
-                    <div class="form-actions-nomargin">
-                        <button type="submit" class="btn btn-primary"><i class="icon-comment icon-white"></i> comment</button>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"><i class="icon-comment icon-white"></i> comment</button>
                         <button type="reset" class="btn">Cancel</button>
                     </div>
                 </form>
@@ -254,12 +255,12 @@
 </script>
 
 <script type="text/template" id="edit-code-form">
-    <div id="${nodeId}" class="row code-comment-form-row">
-        <div class="span9 code-comment-form">
+    <div id="${nodeId}" class="row-fluid code-comment-form-row">
+        <div class="span12 code-comment-form">
             <form class="form-horizontal form-nolabels" action="${formAction}" method="post" {{ form_enctype(contrib_form) }}>
                 {{ form_widget(contrib_form) }}
-                <div class="form-actions-nomargin form-actions ">
-                    <input type="submit" class="btn btn-primary" name="done" value="Submit changes" />
+                <div class="form-actions ">
+                    <input type="submit" class="btn btn-success" name="done" value="Submit changes" />
                     <button type="reset" class="btn btn-reset">Cancel</button>
                 </div>
             </form>
