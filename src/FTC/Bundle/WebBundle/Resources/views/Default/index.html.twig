@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="row">
+<div class="row-fluid">
 	<div class="span12">
         <div class="hero-unit">
           <h1>Fix That Code</h1>
@@ -20,32 +20,76 @@
 </div>
 
 <div class="row-fluid">
-    
-    {% for key, category in categories %}
-        <div class="span4">
-            <span class="label category-header category-{{ key }}">{{ category }}</span><span> <a href="{{ path('entry_type_list', {slug: key}) }}" title="see more.."> <i class="icon-search"></i></a></span>
-            <ul class="unstyled category-entry-list">
-                {% if entries[key] is defined %}
-                    {% for entry in entries[key] %}
-                        <li>
-                            <p><a href="{{ path("entry_show", {id: entry.id}) }}">{{ entry.title }}</a></p>
-                            <p>{{ entry.description[0:150] }}...</p>
-                        </li>                   
-                    {% endfor %}
-                {% else %}
-                    <li>No entries yet, <a href="#">create one</a>.</li>
-                {% endif %}
-            </ul>
+    <div class="span2">
+        <h3>You can get help in these categories:</h3>
+    </div>
+    {% for key, category in categories.getTargetUserChoices() %}
+
+        <div class="type-well span2 type-{{ key }}-bg rounded">
+            <h3>{{ category }}</h3>
+            <p class="desc">{{ categories.getCategoryDetails(key) }}</p>
+            <div class="right"><a href="{{ path('entry_type_list', {slug: key}) }}"><i class="icon-search icon-white"></i></a></div>
         </div>
-        
-        {% if loop.index == 3 %}
-        </div>
-        <div class="row-fluid">
-        {% endif %}
-        
+
     {% endfor %}
+</div>
+
+<div class="row-fluid">
+    <div class="span8">
+        <h1 id="activity">Latest Code Entries</h1>
+        <ul class="unstyled activity-list">
+            {% for entry in entries %}
+            <li class="entry">
+                
+                <div class="row-fluid">
+                    <div class="span3 type-{{entry.type}}-bg rounded type-well-mini ">
+                        {{ entry.getTargetUserTypeText() }}
+                    </div>
+                    
+                    <div class="span9">
+                        <h3>
+                            <a href="{{path("entry_show", {id: entry.id})}}">{{entry.title}}</a>
+                            <span class="badge badge-inverse">{{ entry.comments.count()}} reactions</span>
+                        </h3>
+                        <p class="description">{{entry.description[0:300]}}</p>
+                        <p>     
+                            <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}"><img src="{{ gravatar(entry.author.email, 25) }}" alt=""></a>
+                            <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}">{{ entry.author.fullName}}</a>
+
+                            <span class=""> about {{entry.dateSubmited|daysAgo}}</span>
+                        </p>
+                    </div>
+                </div>
+            </li>                    
+            {% endfor %}
+        </ul>
+    </div>
     
 
+    <div class="span4 ">
+        
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="well">
+                    <h3>Add your own code</h3>
+                    Want to improve you code? Or maybe just get some feedback from other developers? <a href="#">add your own entry now.</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row-fluid">
+            <div class="span12">
+                <h1 id="latest_users">Latest Users</h1>
+                <div class="user-avatar-list">
+                    {% for user in users %}
+                        <a href="{{path("user_profile", {username: user.usernameCanonical})}}"><img src="{{ gravatar(user.email, 60) }}" alt="" title="{{ user.fullName }}"></a>
+                    {% endfor %}            
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>
+
 {% endblock %}
 

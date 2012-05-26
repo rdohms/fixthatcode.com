@@ -3,6 +3,8 @@
 namespace FTC\Bundle\CodeBundle\Controller;
 
 use FTC\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -108,7 +110,7 @@ class CodeEntryController extends Controller
             );
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -127,7 +129,7 @@ class CodeEntryController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FTCCodeBundle:CodeEntry')->find($id);
 
@@ -151,15 +153,24 @@ class CodeEntryController extends Controller
      * @Route("/{id}/update", name="entry_update")
      * @Method("post")
      * @Template("FTCCodeBundle:CodeEntry:edit.html.twig")
+     *
+     * @param $id
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FTCCodeBundle:CodeEntry')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find CodeEntry entity.');
+        }
+
+        if ($entity->getAuthor() != $this->getUser()) {
+            throw new AccessDeniedHttpException("Not Owner");
         }
 
         $editForm   = $this->createForm(new CodeEntryType(), $entity);
@@ -173,7 +184,9 @@ class CodeEntryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('entry_edit', array('id' => $id)));
+            $this->getSession()->getFlashBag()->add('success', 'Your entry was updated.');
+
+            return $this->redirect($this->generateUrl('entry_show', array('id' => $id)));
         }
 
         return array(

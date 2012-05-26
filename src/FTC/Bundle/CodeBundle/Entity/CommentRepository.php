@@ -3,6 +3,7 @@
 namespace FTC\Bundle\CodeBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CommentRepository
@@ -12,4 +13,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentRepository extends EntityRepository
 {
+
+    public function getUserComments($user)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->andWhere('c.author = ?0');
+
+        $qb->setParameter(0, $user);
+
+        return new ArrayCollection($qb->getQuery()->getResult());
+    }
+
 }

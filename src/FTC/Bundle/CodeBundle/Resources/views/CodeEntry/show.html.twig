@@ -7,8 +7,7 @@
     <div class="span9">
         <div class="row-fluid">
             <div class="span12">
-                <span class="label label-info">{{ entry.getTargetUserTypeText() }}</span>
-
+                <h3 class="type-{{entry.type}}-bg type-title">{{ entry.getTargetUserTypeText() }}</h3>
                 <h1 class="entry-title">
                     {{ entry.title }}
                     {% if app.user == entry.author %}
@@ -58,7 +57,7 @@
 
         <div class="row-fluid">
             <div class="span8">
-                <h2>Reactions</h2>
+                <h2>Reactions <span class="badge badge-inverse">{{ entry.comments.count()}} reactions</span></h2>
             </div>
             <div class="span4 right">
                 <a href="#comment-form" class="btn btn-info" {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}disabled="disabled"{% endif %}>
@@ -77,7 +76,7 @@
                 {% for comment in entry.comments %}
                     <div class="row-fluid comment">
                         <div class="span8">
-                                <a href="#">
+                                <a href="{{ path('user_profile', {username: comment.author.usernameCanonical}) }}">
                                     <img src="{{ gravatar(comment.author.email, 20) }}" alt="{{comment.author.username}}">
                                     <strong>{{comment.author.fullname|default(comment.author.username)}}</strong>
                                 </a>
@@ -162,7 +161,7 @@
             <div class="span4">
                 <img src="{{ gravatar(entry.author.email, 85) }}" alt="">
                 <ul class="nav nav-list profile-links">
-                  <li><a href="{{ path("user_profile", {id: entry.author.id}) }}" title="View {{ entry.author.fullname }}'s Profile"><i class="icon-user"></i> Profile</a></li>
+                  <li><a href="{{ path("user_profile", {username: entry.author.usernameCanonical}) }}" title="View {{ entry.author.fullname }}'s Profile"><i class="icon-user"></i> Profile</a></li>
                 </ul>
             </div>
         </div>
@@ -185,7 +184,7 @@
             <div class="span12">
                 <h3>Participants</h3>
                 {% for author in entry.getInteractionAuthors() %}
-                    <a href="{{ path("user_profile", {id: author.id}) }}" title="View {{ author.fullname }}'s Profile"><img src="{{ gravatar(author.email, 32) }}" alt="{{ author.fullname }}"></a>
+                    <a href="{{ path("user_profile", {username: author.usernameCanonical}) }}" title="View {{ author.fullname }}'s Profile"><img src="{{ gravatar(author.email, 32) }}" alt="{{ author.fullname }}"></a>
                 {% endfor %}
             </div>
         </div>

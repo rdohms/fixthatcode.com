@@ -86,10 +86,17 @@ footer { margin-top: 35px; }
 }
 .footer-nav ul li { float: right; padding: 0 15px; }
 
+.rounded {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
 .stats {}
 .stats dt, .stats dd {line-height: 30px; float: left;}
 .stats dt { font-size: 200%; clear: left; }
 .stats dd { }
+.stats dl { clear: both }
 
 .code-comment-form { background-color: #E8E8E8; margin-bottom: 18px; padding-top: 15px;}
 .code-comment-form .form-actions { background-color: #E8E8E8; margin: 0 0 0 15px; padding: 10px 5px;}
@@ -115,3 +122,35 @@ footer { margin-top: 35px; }
 .category-codinghorror { background-color: #B94A48; }
 .category-feedback { }
 .category-challenge { }
+
+
+.profile-page .avatar { float: left; padding-right: 15px;}
+.profile-page .profile-block { width:100%; padding-bottom: 15px }
+
+.activity-list { padding-top: 15px;}
+.activity-list .date { color: #aaa  }
+
+.entry-list { padding-top: 15px;}
+.entry-list li { padding-bottom: 25px }
+.entry-list .date { color: #aaa  }
+
+.type-betterperformance { color: #36AAA7 }
+.type-codinghorror { color: #B95D44 }
+.type-feedback { color: #C7CB46 }
+.type-improvecode { color: #7FCB46 }
+.type-challenge { color: #B85ACB }
+
+.type-betterperformance-bg,.type-codinghorror-bg,.type-feedback-bg,.type-improvecode-bg, .type-challenge-bg { color: #FFF; }
+.type-betterperformance-bg { background-color: #36AAA7;}
+.type-codinghorror-bg { background-color: #B95D44 }
+.type-feedback-bg { background-color: #C7CB46 }
+.type-improvecode-bg { background-color: #7FCB46 }
+.type-challenge-bg { background-color: #B85ACB }
+
+.type-title { padding: 5px }
+.type-well { padding: 10px; margin: 10px 0; height: 180px }
+.type-well-mini { padding: 10px; margin: 0px 0 10px 0; font-weight: bold; text-align: center }
+.type-well .desc { height: 90px; }
+
+.user-avatar-list { text-align:center; }
+.user-avatar-list img { padding-bottom: 5px }

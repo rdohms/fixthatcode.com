@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-            new DMS\Bundles\LauncherBundle\DMSLauncherBundle(),
+            new DMS\Bundle\LauncherBundle\DMSLauncherBundle(),
 
             new FTC\Bundle\WebBundle\FTCWebBundle(),
             new FTC\Bundle\AuthBundle\FTCAuthBundle(),
