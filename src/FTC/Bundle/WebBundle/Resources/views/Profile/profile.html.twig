@@ -1,0 +1,70 @@
+{% extends 'FTCWebBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="profile-page">
+
+    <div class="row-fluid">
+        
+        <div class="span9">
+            <h1 id="activity">Activity</h1>
+            <ul class="unstyled activity-list">
+                {% for entry in entries %}
+                <li class="entry">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <span class="label label-info type-{{entry.type}}-bg">{{ entry.getTargetUserTypeText() }}</span>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <h3>
+                                <a href="{{path("entry_show", {id: entry.id})}}">{{entry.title}}</a>
+                                <span class="badge badge-inverse">{{ entry.comments.count()}} reactions</span>
+                            </h3>
+                            <p class="description">
+                                {{entry.description[0:150]}}...
+                                
+                                <span class="date right">  {{entry.dateSubmited|daysAgo}}</span>
+                                </p>
+                        </div>
+                    </div>
+                    
+                </li>                    
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="span3 sidebar">
+            <div class="row-fluid profile">
+                <div class="span8">
+                    <h3>{{ user.fullName }}</h3>
+                    <p>{{user.bio}}</p>
+                </div>
+                <div class="span4">
+                    <img src="{{ gravatar(user.email, 85) }}" alt="">
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3>Stats</h3>
+
+                    <dl class="stats">
+                        <dt>{{ stats.entries }}</dt>
+                        <dd>Code Entries</dd>
+
+                        <dt>{{ stats.comments }} </dt>
+                        <dd>Comments</dd>
+
+                        <dt>{{ stats.contributions }}</dt>
+                        <dd>Contributions</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+{% endblock %}

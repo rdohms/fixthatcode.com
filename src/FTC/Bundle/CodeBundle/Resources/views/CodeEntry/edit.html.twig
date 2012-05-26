@@ -1,22 +1,23 @@
-<h1>CodeEntry edit</h1>
+{% extends 'FTCWebBundle::layout.html.twig' %}
 
-<form action="{{ path('entry_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
+{% block content %}
+<div class="row">
+	<div class="span4">
+		<h2>Editing your Entry</h2>
+		<p>Got something wrong? Go ahead and fix it, here you can edit all the details and even change your code o a different category</p>
+		<p>If you need to alter something in the actual code, just submit a code change and it will help keep history.</p>
+	</div>
+	<div class="span8">
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('entry') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('entry_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+		<form class="form-horizontal" action="{{ path('entry_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+            {{ form_widget(edit_form) }}
+	        <div class="form-actions">
+	            <button type="submit" class="btn btn-primary">Update the details</button>
+	            <button type="reset" class="btn">Cancel</button>
+	        </div>
+		</form>
+
+	</div>
+</div>
+{% endblock %}
+

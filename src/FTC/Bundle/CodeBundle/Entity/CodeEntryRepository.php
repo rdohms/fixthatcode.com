@@ -3,6 +3,7 @@
 namespace FTC\Bundle\CodeBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CodeEntryRepository
@@ -22,4 +23,14 @@ class CodeEntryRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getUserEntries($user)
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->andWhere('e.author = ?0');
+
+        $qb->setParameter(0, $user);
+        $qb->orderBy('e.id', 'DESC');
+
+        return new ArrayCollection($qb->getQuery()->getResult());
+    }
 }

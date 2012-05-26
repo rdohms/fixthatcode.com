@@ -31,7 +31,7 @@ class User extends FOSUser
     /**
      * @var string $bio
      *
-     * @ORM\Column(name="bio", type="text")
+     * @ORM\Column(name="bio", type="text", nullable=true)
      */
     protected $bio;
 

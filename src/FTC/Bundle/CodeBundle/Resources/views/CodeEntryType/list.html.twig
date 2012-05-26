@@ -3,15 +3,36 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span12">
-        <h2>Code Entries</h2>
-        <ul class="unstyled">
+        <h2 class="type-{{slug}}-bg type-title">{{title}}</h2>
+        <ul class="unstyled entry-list">
             {% for entry in entries %}
-                <li>
-                    <p><a href="{{ path("entry_show", {id: entry.id}) }}">{{ entry.title }}</a></p>
-                    <p>{{ entry.description }}</p>
-                </li>                   
+            <li class="entry">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h3>
+                            <a href="{{path("entry_show", {id: entry.id})}}">{{entry.title}}</a>
+                            <span class="badge badge-inverse">{{ entry.comments.count()}} reactions</span>
+                        </h3>
+                        <p class="description">
+                            {{entry.description[0:300]}}
+                        </p>
+
+                            
+                            
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}"><img src="{{ gravatar(entry.author.email, 25) }}" alt=""></a>
+                        <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}">{{ entry.author.fullName}}</a>
+                        
+                        <span class=""> about {{entry.dateSubmited|daysAgo}}</span>
+                    </div>
+                </div>
+
+            </li>               
             {% else %}
-                    <li>No entries yet, <a href="#">create one</a>.</li>
+                    <li>No entries yet, <a href="{{path('entry_new')}}">create one</a>.</li>
             {% endfor %}
         </ul>
     </div>

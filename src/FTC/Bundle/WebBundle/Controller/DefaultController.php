@@ -18,23 +18,16 @@ class DefaultController extends Controller
         $categories = new CodeEntryTypeChoices();
 
         $entryService = $this->get('ftc_code.entry');
-        $latest = $entryService->getLatest(10);
+        $latest = $entryService->getLatest(5);
 
-        $sortedEntries = array();
-        $categoryFilter = function($entry) use (&$sortedEntries) {
-
-            if (!isset($sortedEntries[$entry->getType()])) {
-                $sortedEntries[$entry->getType()] = array();
-            }
-
-            $sortedEntries[$entry->getType()][] = $entry;
-        };
-
-        $latest->map($categoryFilter);
+        /** @var $userRepo \FTC\Bundle\AuthBundle\Entity\UserRepository */
+        $userRepo = $this->getDoctrine()->getManager()->getRepository('FTCAuthBundle:User');
+        $users    = $userRepo->getLatest(20);
 
         return array(
-            'entries'    => $sortedEntries,
-            'categories' => $categories->getTargetUserChoices()
+            'users'      => $users,
+            'entries'    => $latest,
+            'categories' => $categories,
         );
     }
 }

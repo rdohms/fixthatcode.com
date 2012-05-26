@@ -3,6 +3,7 @@
 namespace FTC\Bundle\CodeBundle\Controller;
 
 use FTC\Controller\Controller;
+use FTC\Bundle\CodeBundle\Entity\Choice\CodeEntryTypeChoices;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -35,7 +36,13 @@ class CodeEntryTypeController extends Controller
         $entries = $queryBuilder->getQuery()->getResult();
         //Todo: pagination
 
-        return array('entries' => $entries);
+        $choices = new CodeEntryTypeChoices();
+
+        return array(
+            'entries' => $entries,
+            'title'   => $choices->getTargetUserText($slug),
+            'slug'    => $slug
+        );
     }
 
 }

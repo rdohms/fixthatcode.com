@@ -5,3 +5,8 @@ services:
             context: @security.context
         tags:
             -  { name: twig.extension }
+
+    ftc_web.twig.extension.date:
+        class: FTC\Bundle\WebBundle\Twig\Date\DateExtension
+        tags:
+            -  { name: twig.extension }
