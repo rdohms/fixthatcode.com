@@ -79,3 +79,10 @@ fos_user:
     registration:
         form:
             type: ftc_auth_registration
+
+whitewashing_loggly:
+    key: e61be2f7-71fb-43fc-97a2-cfb8faf2b4c6
+    host: logs.loggly.com
+    port: 443
+    level: WARNING
+    bubble: true
