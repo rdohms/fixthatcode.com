@@ -7,12 +7,13 @@
 {% endblock %}
 
 {% block body %}
-
+    <img id="beta-tag" src="/bundles/ftcweb/images/beta-tag.png">
+    
 	{% block navbar %}
 	<nav class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="{{ path("home") }}">{% block brand %}Fix That Code!{% endblock %}</a>
+				<a class="brand" href="{{ path("home") }}">{% block brand %}Fix That Code!<span id="small-beta-tag">Beta</span>{% endblock %}</a>
 			
 					{% block nav_content %}
 					<ul class="nav">
@@ -77,5 +78,17 @@
 
 		</div>
 	{% endblock container %}
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#beta-tag").addClass("visible");
+        $("#small-beta-tag").addClass("visible"); 
+    });
+</script>
 
 {% endblock %}
