@@ -24,3 +24,7 @@ This is the repository for the Fix That Code project.
     app/console doctrine:schema:create
 
 6. Fire it up!
+
+Deploy Notes:
+
+- find ./vendor -name ".git" -exec rm -rf {} \;
