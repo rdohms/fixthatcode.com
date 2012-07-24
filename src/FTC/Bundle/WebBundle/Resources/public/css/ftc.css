@@ -74,7 +74,7 @@ h1.entry-title{ margin-bottom: 18px; }
 
 .profile h3{ margin-top: 0px; }
 
-.profile-links > li > a {padding: 3px 10px;} 
+.profile-links > li > a {padding: 3px 10px;}
 
 footer { margin-top: 35px; }
 
@@ -154,3 +154,43 @@ footer { margin-top: 35px; }
 
 .user-avatar-list { text-align:center; }
 .user-avatar-list img { padding-bottom: 5px }
+
+#small-beta-tag {
+    color: #FB0007;
+    opacity: 0;
+    display: none;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+}
+
+#small-beta-tag.visible { opacity: 1; }
+
+#beta-tag {
+    z-index: -999;
+    position: fixed;
+    right: 10px;
+    top: -40px;
+    -webkit-transition: top 1s;
+    -moz-transition: top 1s;
+    -o-transition: top 1s;
+}
+
+#beta-tag.visible { top: 40px; }
+
+@media only screen and (max-width: 979px) {
+    #twitter {
+        width: auto;
+        position: absolute;
+        margin-top: 70px;
+        padding-bottom: 30px;
+    }
+
+    #beta-tag {
+        display: none;
+    }
+
+    #small-beta-tag {
+        display: inline;
+    }
+}
