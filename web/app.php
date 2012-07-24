@@ -4,6 +4,8 @@ require_once __DIR__.'/../app/bootstrap.php.cache';
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
+ini_set('error_log', __DIR__. '/../php_error.log');
+
 // Define application environment
 defined('APP_ENV')
     || define('APP_ENV', (getenv('APP_ENV') ? getenv('APP_ENV') : 'prod'));
