@@ -30,4 +30,13 @@ class DefaultController extends Controller
             'categories' => $categories,
         );
     }
+
+    /**
+     * @Route("/about", name="about")
+     * @Template()
+     */
+    public function aboutAction()
+    {
+        return array();
+    }
 }

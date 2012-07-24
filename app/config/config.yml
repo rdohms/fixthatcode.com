@@ -63,9 +63,10 @@ swiftmailer:
 jms_security_extra:
     secure_all_services: false
 
-dms_launcher:
-    site_url: "http://ftc.local"
-    twitter_account: "ftc"
+#dms_launcher:
+#    application:
+#        site_url: "http://ftc.local"
+#        twitter_account: "ftc"
 
 mopa_bootstrap:
     form:

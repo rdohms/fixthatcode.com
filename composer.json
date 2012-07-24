@@ -44,6 +44,8 @@
 
         "mopa/bootstrap-bundle":            "dev-master",
 
+        "beberlei/loggly-bundle":           "dev-master",
+
         "pear-horde/Horde_Text_Diff":       "*",
 
         "dms/dms":                          "dev-master"
@@ -89,5 +91,6 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "symfony-assets-install": "symlink"
-    }
+    },
+    "minimum-stability": "dev"
 }
