@@ -116,6 +116,7 @@ class CodeEntryInteractionController extends Controller
         $snippet->setParent($parentSnippet);
         $snippet->setComment($comment);
         $snippet->setName($parentSnippet->getName());
+        $snippet->setLanguage($parentSnippet->getLanguage());
 
         //Get Diff
         $snippet->setDiff($this->generateDiff($parentSnippet->getCode(), $snippet->getCode()));

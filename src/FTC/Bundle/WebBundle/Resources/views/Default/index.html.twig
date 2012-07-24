@@ -25,7 +25,7 @@
     </div>
     {% for key, category in categories.getTargetUserChoices() %}
 
-        <div class="type-well span2 type-{{ key }}-bg rounded">
+        <div class="type-well span2 type-{{ key }}-bg rounded categoryBox">
             <h3>{{ category }}</h3>
             <p class="desc">{{ categories.getCategoryDetails(key) }}</p>
             <div class="right"><a href="{{ path('entry_type_list', {slug: key}) }}"><i class="icon-search icon-white"></i></a></div>
@@ -72,7 +72,8 @@
             <div class="span12">
                 <div class="well">
                     <h3>Add your own code</h3>
-                    Want to improve you code? Or maybe just get some feedback from other developers? <a href="#">add your own entry now.</a>
+                    Want to improve you code? Or maybe just get some feedback from other developers? 
+                    <a class="btn btn-success" href="#">Add your own code</a>
                 </div>
             </div>
         </div>
@@ -93,3 +94,12 @@
 
 {% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" charset="utf-8">
+    $(".categoryBox").click(function(){
+         window.location=$(this).find("a").attr("href"); 
+         return false;
+    });
+</script>
+{% endblock %}
