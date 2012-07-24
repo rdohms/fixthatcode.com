@@ -1,0 +1,27 @@
+services:
+    dms_launcher.pre_user:
+        class: DMS\Bundle\LauncherBundle\Service\PreUserService
+        arguments:
+            entity_manager: @doctrine.orm.entity_manager
+
+    dms_launcher.export:
+        class: DMS\Bundle\LauncherBundle\Service\ExportService
+        arguments:
+            doctrine_em: @doctrine.orm.entity_manager
+
+    dms_launcher.launcher_extension:
+        class: DMS\Bundle\LauncherBundle\Twig\LauncherExtension
+        calls:
+            - [ setContainer,  [@service_container] ]
+        tags:
+            - { name: twig.extension }
+
+    dms_launcher.access_listener:
+        class: DMS\Bundle\LauncherBundle\Listener\AccessListener
+        arguments:
+            enable:           %dms_launcher.enable%
+            whitelist:        %dms_launcher.whitelist%
+            security_context: @security.context
+            router:           @router
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

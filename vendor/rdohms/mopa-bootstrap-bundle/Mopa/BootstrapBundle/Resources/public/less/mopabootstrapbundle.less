@@ -1,0 +1,36 @@
+/*!
+ * MopaBootstrapBundle
+ *
+ * Copyright 2011 Mohrenweiser & Partner
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Import this file in your less files as first to be abled to access less vars from your file
+ * OR
+ * Add it to the stylesheets of assetic or 
+ * Add it as described on http://www.lesscss.org with the less.js (maybe pathes must be adapted in that case)
+ *
+ * Be careful when using less this way, might be most straight forward, but assetic doesnt check the included files 
+ * for changes, and will only regenerate the css if it detects changes in this file!
+ * 
+ * For development it might be easier to include all you less files in the layout directly
+ * But then assetic will compile each less file in a own compiler session so you cant mix in the less style into bootstrap, which might not be OK
+ */
+
+// Main bootstrap.less entry point
+// you should adapt the path from your bundle to there
+// e.g. you less file lives in src/Acme/DemoBundle/Resources/public/less/mymainless.less
+// then use 
+// @import '../../../../../Acme/DemoBundle/Resources/public/less/mymainless.lesss';
+@import "../../bootstrap/less/bootstrap.less";
+
+// The Paginator less for MopaBootstrapBundle
+@import "paginator.less";
+
+// The Example less for this bundle (sizez container to 820px so be sure you want it :)
+@import "example.less";
+
+
+
+// include the responsive after all of your stuff!
+@import "../../bootstrap/less/responsive.less";
