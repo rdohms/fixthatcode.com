@@ -2,7 +2,7 @@
 namespace FTC\Bundle\CodeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use FTC\Bundle\CodeBundle\Entity\Choice\CodeEntryTypeChoices;
 /**
  * CodeEntry Type

@@ -106,6 +106,9 @@ class SnippetController extends Controller
 
         $snippet->setEntry($entry);
 
+        $user = $this->getUser();
+        $snippet->setAuthor($user);
+
         $em->persist($snippet);
         $em->flush();
 
