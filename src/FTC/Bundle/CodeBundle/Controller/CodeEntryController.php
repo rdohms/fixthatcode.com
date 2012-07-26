@@ -110,6 +110,9 @@ class CodeEntryController extends Controller
             );
         }
 
+        $user = $this->getUser();
+        $entry->setAuthor($user);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
