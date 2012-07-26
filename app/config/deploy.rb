@@ -21,7 +21,7 @@ set  :keep_releases,  3
 
 set  :use_sudo,       false
 set  :use_composer,   true
-set  :update_vendors, false
+set  :update_vendors, true
 
 # Set some paths to be shared between versions
 set :shared_files,    ["app/config/parameters.yml"]

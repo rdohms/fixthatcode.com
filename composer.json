@@ -12,9 +12,7 @@
         "psr-0": {
             "": "src/",
             "DMS": "vendor/dms/dms/DMS/src/"
-        },
-        "classmap": ["vendor/pear-horde"]
-
+        }
     },
 
     "require": {

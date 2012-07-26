@@ -14,10 +14,10 @@ use FTC\Bundle\CodeBundle\Entity\Choice\CodeEntryTypeChoices;
 class CodeEntryType extends AbstractType
 {
     /**
-     * @param \Symfony\Component\Form\FormBuilder $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilder $builder, array $options){
+    public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
             ->add('title', null, array(
                 'help_block' => 'Give your entry a great title so that people can come help',
