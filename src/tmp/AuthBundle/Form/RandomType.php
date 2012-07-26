@@ -3,7 +3,7 @@
 namespace FTC\Bundles\AuthBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Registration Type
@@ -21,7 +21,7 @@ class RandomType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilder $builder
      * @param array $options
      */
-    public function buildForm(FormBuilder $builder, array $options){
+    public function buildForm(FormBuilderInterface $builder, array $options){
         $builder->add('username', 'text') //,array('help' => 'help.registration_username'))
                 ->add('email', 'email')
                 ->add('password', 'repeated', array(
