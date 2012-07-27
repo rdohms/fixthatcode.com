@@ -2,7 +2,7 @@ web/bundles/
 app/bootstrap.php.cache
 app/cache/*
 app/logs/*
-app/config/parameters.ini
+app/config/parameters.yml
 app/phpunit.xml
 
 build/
