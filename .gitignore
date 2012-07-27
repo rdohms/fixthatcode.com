@@ -12,3 +12,4 @@ tmp/*
 .DS_Store
 *.tmproj
 .idea
+.rsync_cache
