@@ -67,7 +67,7 @@ class Snippet
     /**
      * @var string $diff
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $diff;
 

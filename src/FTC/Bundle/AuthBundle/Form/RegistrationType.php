@@ -2,11 +2,11 @@
 namespace FTC\Bundle\AuthBundle\Form;
 
 use FOS\UserBundle\Form\Type\RegistrationFormType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationType extends RegistrationFormType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 

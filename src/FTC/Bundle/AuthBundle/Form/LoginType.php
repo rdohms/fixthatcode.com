@@ -2,7 +2,7 @@
 namespace FTC\Bundle\AuthBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Login Type
@@ -14,10 +14,10 @@ use Symfony\Component\Form\FormBuilder;
 class LoginType extends AbstractType
 {
     /**
-     * @param \Symfony\Component\Form\FormBuilder $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilder $builder, array $options){
+    public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
             ->add('username')
             ->add('password', 'password')
