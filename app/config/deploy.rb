@@ -26,3 +26,7 @@ set  :use_composer,   true
 # Set some paths to be shared between versions
 set :shared_files,    ["app/config/parameters.yml"]
 set :shared_children, [app_path + "/logs", web_path + "/uploads", "vendor"]
+
+set :writable_dirs,     ["app/cache", "app/logs"]
+set :webserver_user,    "www-data"
+set :permission_method, :acl
