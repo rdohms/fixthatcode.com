@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Fix That Code Blog</title>
+ <link href="http://rdohms.github.com/fixthatcode.com/atom.xml" rel="self"/>
+ <link href="http://rdohms.github.com/fixthatcode.com"/>
+ <updated>2012-07-29T13:18:05+02:00</updated>
+ <id>http://rdohms.github.com/fixthatcode.com</id>
+ <author>
+   <name>Rafael Dohms</name>
+   <email>rafael@doh.ms</email>
+ </author>
+
+ 
+ <entry>
+   <title>The Launch</title>
+   <link href="http://rdohms.github.com/fixthatcode.com/launch/2012/07/29/the-launch"/>
+   <updated>2012-07-29T00:00:00+02:00</updated>
+   <id>http://rdohms.github.com/fixthatcode.com/launch/2012/07/29/the-launch</id>
+   <content type="html">&lt;p&gt;After a long while developing this project, I decided it needed to go live to see if there was enough of a need for it, before i worked on new features. Its also a great way to get more pressure into actually developing it between a busy schedule of new talks, other projects and enjoying this new Amsterdam-life.&lt;/p&gt;
+
+&lt;p&gt;The project went live on friday but I had decided on a soft launch, just tell a few people to see initial reactions, was I surprised when that actually because over 1K unique users. Even better, the site seems to hold out pretty well handling everything without problems and welcoming over 70 users into the fold. My first reaction was: &amp;#8220;Wow! Thanks guys!&amp;#8221; , followed shortly by &amp;#8220;Holy Crap!&amp;#8221; and then &amp;#8220;Oh this is a bug, yes that too&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;Now that I am convinced about the actual use of this website, I&amp;#8217;m putting back into rotation for new features to be coded, so keep an eye out on this blog and things will be showing up. Thank you very much for all the tips, visits and critics.&lt;/p&gt;</content>
+ </entry>
+ 
+ 
+</feed>

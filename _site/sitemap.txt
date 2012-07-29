@@ -1,0 +1,10 @@
+
+http://rdohms.github.com/fixthatcode.com/archive.html
+http://rdohms.github.com/fixthatcode.com/atom.xml
+http://rdohms.github.com/fixthatcode.com/categories.html
+http://rdohms.github.com/fixthatcode.com/index.html
+http://rdohms.github.com/fixthatcode.com/pages.html
+http://rdohms.github.com/fixthatcode.com/sitemap.txt
+http://rdohms.github.com/fixthatcode.com/tags.html
+
+http://rdohms.github.com/fixthatcode.com/launch/2012/07/29/the-launch
