@@ -7,8 +7,8 @@
 {% endblock %}
 
 {% block body %}
-    <img id="beta-tag" src="/bundles/ftcweb/images/beta-tag.png">
-    
+	<img id="beta-tag" src="/bundles/ftcweb/images/beta-tag.png">
+	
 	{% block navbar %}
 	<nav class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -27,9 +27,9 @@
 							{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.user.username}} <b class="caret"></b></a>
-								    <ul class="dropdown-menu">
-								      <li><li><a href="">..</a></li></li>
-								    </ul>
+									<ul class="dropdown-menu">
+									  <li><li><a href="">..</a></li></li>
+									</ul>
 								</li>
 								<li><a href="/logout">Logout <i class="icon-off icon-white"></i></a></li>
 							{% else %}
@@ -51,7 +51,7 @@
 			<div class="page">
 
 				{% block flashes %}
-				    {{ session_flash() }}
+					{{ session_flash() }}
 				{% endblock flashes %}
 
 				<div class="content">
@@ -62,20 +62,19 @@
 					{% block footer %}
 					<div class="row-fluid">
 					   <div class="span6">
-					       &copy; {{ "now"|date('Y') }} - Developed by <a href="http://doh.ms">Rafael Dohms</a>.
+						   &copy; {{ "now"|date('Y') }} - Developed by <a href="http://doh.ms">Rafael Dohms</a>.
 					   </div>
 					   <div class="span6 right footer-nav">
-					       <ul>
-					           <li class="divider-vertical"><a href="https://github.com/rdohms/fixthatcode.com/issues">report bugs</a></li>
-					           <li class="divider-vertical"><a href="{{ path("about") }}">about</a></li>
-					       </ul>
+						   <ul>
+							   <li class="divider-vertical"><a href="https://github.com/rdohms/fixthatcode.com/issues">report bugs</a></li>
+							   <li class="divider-vertical"><a href="{{ path("about") }}">about</a></li>
+							   <li class="divider-vertical"><a href="http://rdohms.github.com/fixthatcode.com">blog</a></li>
+						   </ul>
 					   </div>
 					</div>
 					{% endblock footer %}
 				</footer>
 			</div>
-
-
 		</div>
 	{% endblock container %}
 
@@ -85,24 +84,24 @@
 {{ parent() }}
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-        $("#beta-tag").addClass("visible");
-        $("#small-beta-tag").addClass("visible"); 
-    });
+	$(document).ready(function(){
+		$("#beta-tag").addClass("visible");
+		$("#small-beta-tag").addClass("visible"); 
+	});
 </script>
 
 {% if app.environment == "prod" %}
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-33689152-1']);
-  _gaq.push(['_trackPageview']);
+	 var _gaq = _gaq || [];
+	 _gaq.push(['_setAccount', 'UA-33689152-1']);
+	 _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	 (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	 })();
 
 </script>
 {% endif %}
