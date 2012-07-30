@@ -2,10 +2,13 @@
 
 namespace FTC\Bundle\CodeBundle\Controller;
 
-use FTC\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FTC\Bundle\CodeBundle\Event\SnippetPayload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use FTC\Controller\Controller;
+use FTC\Bundle\CodeBundle\Event\CommentPayload;
+use FTC\Bundle\CodeBundle\Event\Events;
 use FTC\Bundle\CodeBundle\Entity\CodeEntry;
 use FTC\Bundle\CodeBundle\Form\CodeEntryType;
 use FTC\Bundle\CodeBundle\Entity\Comment;
@@ -37,8 +40,8 @@ class CodeEntryInteractionController extends Controller
 
         $comment = new Comment();
 
-        $form    = $this->createForm(new CommentType(), $comment);
-        $form->bindRequest($request);
+        $form = $this->createForm(new CommentType(), $comment);
+        $form->bind($request);
 
         if ( ! $form->isValid()) {
             //Handle error and return to entry show
@@ -61,6 +64,10 @@ class CodeEntryInteractionController extends Controller
 
         $em->persist($comment);
         $em->flush();
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher */
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(Events::NEW_COMMENT, new CommentPayload($comment));
 
         $this->getFlashBag()->add('success', 'Your comment has been added.');
         return $this->redirect($this->generateUrl('entry_show', array('id' => $id)));
@@ -86,7 +93,7 @@ class CodeEntryInteractionController extends Controller
         $snippet = new Snippet();
 
         $form    = $this->createForm(new ContributeToSnippetType(), $snippet);
-        $form->bindRequest($this->getRequest());
+        $form->bind($this->getRequest());
 
         if ( ! $form->isValid()) {
             //Handle error and return to entry show
@@ -124,10 +131,22 @@ class CodeEntryInteractionController extends Controller
         $em->persist($snippet);
         $em->flush();
 
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher */
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(Events::NEW_SNIPPET, new SnippetPayload($snippet));
+
         $this->getFlashBag()->add('success', 'Your contribution has been added.');
         return $this->redirect($this->generateUrl('entry_show', array('id' => $id)));
     }
 
+    /**
+     * Generates a diff of the contributed code to the original
+     *
+     * @param string $parentCode
+     * @param string $currentCode
+     *
+     * @return string
+     */
     public function generateDiff($parentCode, $currentCode)
     {
         $diff = new \Horde_Text_Diff('auto', array(explode(PHP_EOL, $parentCode), explode(PHP_EOL, $currentCode)));
