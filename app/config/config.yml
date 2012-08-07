@@ -57,6 +57,8 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
+    sender_address:  %mailer_sender%
+    delivery_address: %mailer_delivery_address%
 
 jms_security_extra:
     secure_all_services: false

@@ -1,0 +1,16 @@
+{% extends 'FTCWebBundle:Email:base.html.twig' %}
+
+{% block content %}
+
+<p>Some one has suggested a code change to your entry <a href="{{ url('entry_show', {id: entry.id}) }}">{{ entry.title }}</a>.</p>
+
+
+<p><strong>{{ snippet.comment.author.fullName }}</strong> described his change as:</p>
+
+<blockquote>
+	{{ snippet.comment.comment|nl2br }}
+</blockquote>
+
+<p>See the <strong>code</strong> and the whole conversation <a href="{{ url('entry_show', {id: entry.id}) }}#cmt{{ snippet.comment.id }}">on FixThatCode.</a></p>
+
+{% endblock %}

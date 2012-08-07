@@ -1,7 +1,9 @@
 <?php
 namespace FTC\Bundle\CodeBundle\Event;
 
-class CommentPayload
+use Symfony\Component\EventDispatcher\Event;
+
+class CommentPayload extends Event
 {
 
     /**

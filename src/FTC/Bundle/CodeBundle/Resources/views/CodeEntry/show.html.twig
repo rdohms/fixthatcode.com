@@ -74,6 +74,7 @@
         <div class="row-fluid">
             <div class="span12">
                 {% for comment in entry.comments %}
+					<a name="cmt{{ comment.id }}"></a>
                     <div class="row-fluid comment">
                         <div class="span8">
                                 <a href="{{ path('user_profile', {username: comment.author.usernameCanonical}) }}">

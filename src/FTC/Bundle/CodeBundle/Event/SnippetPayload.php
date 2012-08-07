@@ -1,7 +1,9 @@
 <?php
 namespace FTC\Bundle\CodeBundle\Event;
 
-class SnippetPayload
+use Symfony\Component\EventDispatcher\Event;
+
+class SnippetPayload extends Event
 {
 
     /**
