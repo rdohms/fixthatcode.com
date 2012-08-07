@@ -1,0 +1,15 @@
+body{
+    
+    margin: 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    background-color: #FFF;
+    padding:10px;
+}
+
+.content {
+    background-color: #EEE;
+    padding: 10px;
+    width: 100%;
+}
