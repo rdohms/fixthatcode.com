@@ -1,0 +1,16 @@
+{% extends 'FTCWebBundle:Email:base.html.twig' %}
+
+{% block content %}
+
+<p>A new comment has been added to your entry <a href="{{ url('entry_show', {id: entry.id}) }}">{{ entry.title }}</a>.</p>
+
+
+<p><strong>{{ comment.author.fullName }}</strong> said:</p>
+
+<blockquote>
+	{{ comment.comment|nl2br }}
+</blockquote>
+
+<p>Reply or see the whole conversation <a href="{{ url('entry_show', {id: entry.id}) }}#cmt{{ comment.id }}">on FixThatCode.</a></p>
+
+{% endblock %}

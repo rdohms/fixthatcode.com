@@ -6,10 +6,12 @@ parameters:
   database_user:     root
   database_password: root
 
-  mailer_transport:  smtp
-  mailer_host:       localhost
-  mailer_user:       ~
-  mailer_password:   ~
+  mailer_transport: gmail
+  mailer_host:
+  mailer_user: noreply@fixthatcode.com
+  mailer_password: cNYEDcL72m
+  mailer_sender: notification@fixthatcode.com
+  mailer_delivery_address: dev@fixthatcode.com
 
   locale:            en
   secret:            87f2671fe0f483a5571f55211107764c0e66df6c
