@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}Fix That Code! - A place to make code better{% endblock %}</title>
+		{% block stylesheets %}
+		<link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost() }}/bundles/ftcweb/css/ftc-email.css" type="text/css">
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}
+		
+		<div class="content">
+			{% block content %}{% endblock %}
+		</div>
+		
+		{% endblock %}
+	</body>
+</html>
