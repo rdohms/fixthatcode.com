@@ -22,7 +22,7 @@ class SnippetType extends AbstractType
                 'choice_list' => new CodeLanguageChoices(),
                 'attr'        => array('class' => 'span6'),
                 'label'       => "What language is it written in?",
-                'required'    => false,
+                'required'    => true,
                 'empty_value' => 'Choose a language',
             ))
             ->add('code')

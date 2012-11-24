@@ -3,6 +3,7 @@
 namespace FTC\Bundle\CodeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * FTC\Bundle\CodeBundle\Entity\Snippet
@@ -25,6 +26,8 @@ class Snippet
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(255)
      */
     private $name;
 
@@ -32,6 +35,7 @@ class Snippet
      * @var string $language
      *
      * @ORM\Column(name="language", type="string", length=10)
+     * @Assert\NotBlank()
      */
     protected $language;
 

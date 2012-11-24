@@ -4,11 +4,11 @@
 <div class="profile-page">
 
     <div class="row-fluid">
-        
+
         <div class="span9">
             <h1 id="activity">Activity</h1>
             <ul class="unstyled activity-list">
-                {% for entry in entries %}
+                {% for entry in entryPagination %}
                 <li class="entry">
                     <div class="row-fluid">
                         <div class="span12">
@@ -23,17 +23,17 @@
                             </h3>
                             <p class="description">
                                 {{entry.description[0:150]}}...
-                                
+
                                 <span class="date right">  {{entry.dateSubmited|daysAgo}}</span>
                                 </p>
                         </div>
                     </div>
-                    
-                </li>                    
+
+                </li>
                 {% endfor %}
             </ul>
         </div>
-        
+
         <div class="span3 sidebar">
             <div class="row-fluid profile">
                 <div class="span8">
@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 

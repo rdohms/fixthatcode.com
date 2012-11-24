@@ -1,0 +1,3 @@
+form:
+    password_confirmation: "Verify password:"
+    new_password_confirmation: "Verify password:"

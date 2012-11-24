@@ -3,6 +3,7 @@
 namespace FTC\Bundle\CodeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use FTC\Bundle\CodeBundle\Entity\Choice\CodeEntryTypeChoices;
 
@@ -27,6 +28,8 @@ class CodeEntry
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(255)
      */
     private $title;
 
@@ -34,6 +37,7 @@ class CodeEntry
      * @var string $description
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 
