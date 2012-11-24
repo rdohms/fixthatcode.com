@@ -28,19 +28,27 @@ class ProfileController extends Controller
 
         $user = $userManager->findUserByUsername($username);
 
-        $entries  = $entryRepo->getUserEntries($user);
         $comments = $commentsRepo->getUserComments($user);
         $contribs = $comments->filter( function($comment) { return $comment->getSnippet() !== null; } );
 
+        /** @var $paginator \Knp\Component\Pager\Paginator */
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $entryRepo->getUserEntries($user),
+            $this->get('request')->query->get('page', 1),
+            5
+        );
+        $paginationData = $pagination->getPaginationData();
+
         $stats = new \stdClass();
-        $stats->entries       = count($entries);
+        $stats->entries       = $paginationData['totalCount'];
         $stats->comments      = $comments->count() - $contribs->count();
         $stats->contributions = $contribs->count();
 
         return array(
-            'user'    => $user,
-            'stats'   => $stats,
-            'entries' => $entries
+            'user'              => $user,
+            'stats'             => $stats,
+            'entryPagination' => $pagination
         );
     }
 }

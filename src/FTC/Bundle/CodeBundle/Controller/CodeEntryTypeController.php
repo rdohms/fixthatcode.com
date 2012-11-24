@@ -38,7 +38,7 @@ class CodeEntryTypeController extends Controller
         $pagination = $paginator->paginate(
             $queryBuilder->getQuery()->getResult(),
             $this->get('request')->query->get('page', 1),
-            15
+            10
         );
 
         $choices = new CodeEntryTypeChoices();
