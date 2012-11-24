@@ -32,16 +32,21 @@ class CodeEntryTypeController extends Controller
 
         $queryBuilder->andWhere('e.type = ?0');
         $queryBuilder->setParameter(0, $slug);
+        $queryBuilder->orderBy('e.dateSubmited', 'DESC');
 
-        $entries = $queryBuilder->getQuery()->getResult();
-        //Todo: pagination
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $queryBuilder->getQuery()->getResult(),
+            $this->get('request')->query->get('page', 1),
+            15
+        );
 
         $choices = new CodeEntryTypeChoices();
 
         return array(
-            'entries' => $entries,
-            'title'   => $choices->getTargetUserText($slug),
-            'slug'    => $slug
+            'entryPagination' => $pagination,
+            'title'           => $choices->getTargetUserText($slug),
+            'slug'            => $slug
         );
     }
 

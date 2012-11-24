@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             //new DMS\Bundle\LauncherBundle\DMSLauncherBundle(),
 
             new FTC\Bundle\WebBundle\FTCWebBundle(),

@@ -47,7 +47,8 @@
 
         "pear-horde/Horde_Text_Diff":       "*",
 
-        "dms/dms":                          "dev-master"
+        "dms/dms":                          "dev-master",
+        "knplabs/knp-paginator-bundle": "dev-master"
 
     },
 
