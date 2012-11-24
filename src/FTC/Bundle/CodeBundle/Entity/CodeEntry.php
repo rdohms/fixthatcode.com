@@ -83,9 +83,19 @@ class CodeEntry
      */
     protected $comments;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection $tags
+     *
+     * @ORM\ManyToMany(targetEntity="Tag")
+     */
+    protected $tags;
+
     public function __construct()
     {
         $this->dateSubmited = new \DateTime();
+        $this->snippets     = new ArrayCollection();
+        $this->comments     = new ArrayCollection();
+        $this->tags         = new ArrayCollection();
     }
 
     /**
@@ -254,6 +264,22 @@ class CodeEntry
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**

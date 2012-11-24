@@ -183,6 +183,29 @@
         </div>
         <div class="row-fluid">
             <div class="span12">
+                <h3>Tags <span><a href=""><i class="icon icon-plus"></i></a></span></h3>
+
+                <form class="form-inline">
+                    <input id="tag_add_input" type="text" class="input-small" placeholder="tag">
+                    <button type="button" class="btn tag_add_btn">add</button>
+                </form>
+
+                <ul class="tags">
+                    {% for tag in entry.tags %}
+                        <li>
+                            <a href="" title="">{{ tag }}</a>
+                        </li>
+                    {% else %}
+                        <li class="tags_empty">
+                            no tags added
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
                 <h3>Participants</h3>
                 {% for author in entry.getInteractionAuthors() %}
                     <a href="{{ path("user_profile", {username: author.usernameCanonical}) }}" title="View {{ author.fullname }}'s Profile"><img src="{{ gravatar(author.email, 32) }}" alt="{{ author.fullname }}"></a>
@@ -251,6 +274,20 @@
 
             });
         })
+    });
+</script>
+
+<script type="text/javascript">
+    $('.tag_add_btn').bind("click", function (e){
+        e.preventDefault();
+        $.post('{{ path('entry_tag_add', {id: entry.id}) }}', {tag: $('#tag_add_input').val()}, function(data) {
+
+            var html = "<li>"+$('#tag_add_input').val()+"</li>";
+
+            $('.tags').append(html);
+            $('#tag_add_input').val('');
+            $('.tags_empty').hide()
+        });
     });
 </script>
 
