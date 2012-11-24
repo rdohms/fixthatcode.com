@@ -3,13 +3,13 @@
 {% block content %}
 <div class="row">
     <div class="span4">
-        <h1>Adding Snippet to <strong>{{ entry.title }}</strong></h1>        
-        <p>Great, we have you details but now we need your code. Go ahead and type or paste in your code in the form, 
+        <h1>Adding Snippet to <strong>{{ entry.title }}</strong></h1>
+        <p>Great, we have you details but now we need your code. Go ahead and type or paste in your code in the form,
             you can put it all in one single file or add multiple snippets if that organization makes sense to you.</p>
-        <p>Be sure to write code as valid as possible, avoid random snippets as that will not only hinder highlighting 
+        <p>Be sure to write code as valid as possible, avoid random snippets as that will not only hinder highlighting
             useless but may also confuse whoever is going to try to help you. Rename variables and namespaces if your
             company is worried about intellectual property or facilitating attacks, but if the company policy is to
-            not put code out in the open <strong>ever</strong>, then respect their wish. Or try to explain to them 
+            not put code out in the open <strong>ever</strong>, then respect their wish. Or try to explain to them
             that community is the best support team in the world.</p>
         <p>Legal disclaimer: Respect the licensing of code you paste here, if it cannot be pasted here, don't paste it.</p>
     </div>
@@ -37,7 +37,7 @@
 </div>
 {% endblock %}
 
-{% block javascripts %}
+{% block foot_script %}
 {{ parent() }}
 <script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
@@ -46,38 +46,38 @@
 <script>
 $(document).ready(function(){
     $('#ftc_bundle_codebundle_snippettype_code').parent().parent().hide();
-    
+
     var editor = ace.edit("editor");
     editor.setShowPrintMargin(false);
     editor.setTheme("ace/theme/twilight");
 
     var textMode = ace.require("ace/mode/text").Mode;
     editor.getSession().setMode(new textMode());
-    
+
     var size = editor.getSession().getValue().split("\n").length * 20 + 15;
     $("#"+editor.container.id).height(size);
     $("#"+editor.container.id+"-placeholder").height(size + 20);
     editor.resize();
-    
+
     editor.getSession().on('change', function(){
         $('#ftc_bundle_codebundle_snippettype_code').val( editor.getSession().getValue() );
-        
+
         var size = editor.getSession().getValue().split("\n").length * 20 + 15;
         $("#"+editor.container.id).height(size);
         $("#"+editor.container.id+"-placeholder").height(size + 20);
         editor.resize();
     });
-    
+
     $('#ftc_bundle_codebundle_snippettype_language').change( function() {
        var lang, mode, fileref;
-       
+
        lang = $(this).attr('value');
-       
+
        $.getScript("/ace/mode-"+lang+"-noconflict.js", function() {
            mode = ace.require("ace/mode/"+lang).Mode;
            editor.getSession().setMode(new mode());
        });
-       
+
     });
 });
 </script>
