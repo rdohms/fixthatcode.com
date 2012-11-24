@@ -11,10 +11,10 @@
           <p>That's where <strong>FixThatCode.com</strong> steps in! Its a place where you can get feedback on your code, challenge other developers to improve it, work out ideas, in general just collaboratively discuss or rewrite a piece of code. It allows you show pieces of bad code you find, but to also fix them and teach people how to avoid repeating those mistakes.</p>
           <p>Come on in and help us write better code!</p>
         </div>
-	</div>	
+	</div>
 </div>
 
-<div class="row-fluid">
+<div class="row-fluid module-homepage-categories">
     <div class="span2">
         <h3>You can get help in these categories:</h3>
     </div>
@@ -29,25 +29,25 @@
     {% endfor %}
 </div>
 
-<div class="row-fluid">
+<div class="row-fluid module-homepage-entries">
     <div class="span8">
         <h1 id="activity">Latest Code Entries</h1>
         <ul class="unstyled activity-list">
             {% for entry in entries %}
             <li class="entry">
-                
+
                 <div class="row-fluid">
                     <div class="span3 type-{{entry.type}}-bg rounded type-well-mini ">
                         {{ entry.getTargetUserTypeText() }}
                     </div>
-                    
+
                     <div class="span9">
                         <h3>
                             <a href="{{path("entry_show", {id: entry.id})}}">{{entry.title}}</a>
                             <span class="badge badge-inverse">{{ entry.comments.count()}} reactions</span>
                         </h3>
                         <p class="description">{{entry.description[0:300]}}</p>
-                        <p>     
+                        <p>
                             <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}"><img src="{{ gravatar(entry.author.email, 25) }}" alt=""></a>
                             <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}">{{ entry.author.fullName}}</a>
 
@@ -55,14 +55,14 @@
                         </p>
                     </div>
                 </div>
-            </li>                    
+            </li>
             {% endfor %}
         </ul>
     </div>
-    
+
 
     <div class="span4 ">
-        
+
         <div class="row-fluid">
             <div class="span12">
                 <div class="well">
@@ -72,28 +72,28 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row-fluid">
             <div class="span12">
                 <h1 id="latest_users">Latest Users</h1>
                 <div class="user-avatar-list">
                     {% for user in users %}
                         <a href="{{path("user_profile", {username: user.usernameCanonical})}}"><img src="{{ gravatar(user.email, 60) }}" alt="" title="{{ user.fullName }}"></a>
-                    {% endfor %}            
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 
 {% endblock %}
 
-{% block javascripts %}
+{% block foot_script %}
 {{ parent() }}
 <script type="text/javascript" charset="utf-8">
     $(".categoryBox").click(function(){
-         window.location=$(this).find("a").attr("href"); 
+         window.location=$(this).find("a").attr("href");
          return false;
     });
 </script>

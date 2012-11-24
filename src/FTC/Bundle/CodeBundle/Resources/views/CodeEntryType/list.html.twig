@@ -1,7 +1,7 @@
 {% extends 'FTCWebBundle::layout.html.twig' %}
 
 {% block content %}
-<div class="row-fluid">
+<div class="row-fluid module-category-list">
     <div class="span12">
         <h2 class="type-{{slug}}-bg type-title">{{title}}</h2>
         <ul class="unstyled entry-list">
@@ -17,20 +17,20 @@
                             {{entry.description[0:300]}}
                         </p>
 
-                            
-                            
+
+
                     </div>
                 </div>
                 <div class="row-fluid">
                     <div class="span12">
                         <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}"><img src="{{ gravatar(entry.author.email, 25) }}" alt=""></a>
                         <a href="{{path("user_profile", {username: entry.author.usernameCanonical})}}">{{ entry.author.fullName}}</a>
-                        
+
                         <span class=""> about {{entry.dateSubmited|daysAgo}}</span>
                     </div>
                 </div>
 
-            </li>               
+            </li>
             {% else %}
                     <li>No entries yet, <a href="{{path('entry_new')}}">create one</a>.</li>
             {% endfor %}

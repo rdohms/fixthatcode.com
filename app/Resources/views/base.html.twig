@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>{% block title %}Fix That Code! - A place to make code better{% endblock %}</title>
-		{% block stylesheets %}
-        <link href="{{ asset('/bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet"/>
-        {% endblock %}
+{% extends 'MopaBootstrapBundle::base_initializr.html.twig' %}
 
-		<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-	</head>
-	<body>
-		{% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('/jquery/jquery-1.7.2.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('/bootstrap/js/bootstrap.js') }}" type="text/javascript"></script>
-        {% endblock %}
-	</body>
-</html>
+{% block head_style %}
+
+    {% stylesheets
+    '@FTCWebBundle/Resources/public/less/ftc.less'
+    filter='less'
+    output='css/ftc.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+{% endblock head_style %}
+
+{% block title %}Fix That Code! - A place to make code better{% endblock %}

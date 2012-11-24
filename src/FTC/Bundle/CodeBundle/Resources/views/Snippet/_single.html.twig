@@ -2,7 +2,8 @@
 <pre id="editor-{{ snippet.id }}" class="editor">{{ snippet.code }}</pre>
 
 
-{% block javascripts %}
+{% block foot_script %}
+    {{ parent() }}
 <script src="/ace/ace-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/theme-twilight-noconflict.js" type="text/javascript" charset="utf-8"></script>
 <script src="/ace/mode-javascript-noconflict.js" type="text/javascript" charset="utf-8"></script>
