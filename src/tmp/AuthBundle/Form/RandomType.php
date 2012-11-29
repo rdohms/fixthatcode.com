@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Registration Type
  *
- * Rendes a registration form for a new user
+ * Renders a registration form for a new user
  *
  * @package Caas
  * @subpackage UserBundle
