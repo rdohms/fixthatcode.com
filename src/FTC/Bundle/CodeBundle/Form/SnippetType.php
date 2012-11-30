@@ -14,7 +14,7 @@ class SnippetType extends AbstractType
             ->add('name', 'text', array(
                 'attr'       => array('class' => 'span6', 'placeholder' => 'untitled.php'),
                 'label'      => 'Filename',
-                'help_block' => 'USe this so people can better grasp you code organizatio',
+                'help_block' => 'Use this so people can better grasp you code organization',
                 'empty_data' => 'untitled.php',
                 'required'   => false,
             ))
