@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Shtumi\UsefulBundle\ShtumiUsefulBundle(),
             //new DMS\Bundle\LauncherBundle\DMSLauncherBundle(),
 
             new FTC\Bundle\WebBundle\FTCWebBundle(),

@@ -2,79 +2,79 @@
 {% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
 
 {% block body %}
-	<img id="beta-tag" src="/bundles/ftcweb/images/beta-tag.png">
-
-	{% block navbar %}
-	<nav class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="{{ path("home") }}">{% block brand %}Fix That Code!<span id="small-beta-tag">Beta</span>{% endblock %}</a>
-
-					{% block nav_content %}
-					<ul class="nav">
-						<li class="active"><a href="{{ path("home") }}">Home</a></li>
-					</ul>
-					{% endblock %}
-
-					{% block login_bar %}
-					<ul class="nav pull-right">
-						{% if has_security_context() %}
-							{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.user.username}} <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-									  <li><li><a href="">..</a></li></li>
-									</ul>
-								</li>
-								<li><a href="/logout">Logout <i class="icon-off icon-white"></i></a></li>
-							{% else %}
-								<li><a href="{{ path('login') }}">Login</a></li>
-								<li><a href="/register">Register</a></li>
-							{% endif %}
-						{% endif %}
-					</ul>
-					{% endblock %}
-
-			</div>
-		</div>
-	</nav>
-	{% endblock %}
-
-	{% block container %}
-		<div class="container">
-
-			<div class="page">
-
-				{% block flashes %}
-					{{ session_flash() }}
-				{% endblock flashes %}
-
-				<div class="content">
-					{% block content %}{% endblock %}
-				</div>
-
-				<footer class="well">
-					{% block footer %}
-					<div class="row-fluid">
-					   <div class="span6">
-						   &copy; {{ "now"|date('Y') }} - Developed by <a href="http://doh.ms">Rafael Dohms</a>.
-					   </div>
-					   <div class="span6 right footer-nav">
-						   <ul>
-							   <li class="divider-vertical"><a href="https://github.com/rdohms/fixthatcode.com/issues">report bugs</a></li>
-							   <li class="divider-vertical"><a href="{{ path("about") }}">about</a></li>
-							   <li class="divider-vertical"><a href="http://rdohms.github.com/fixthatcode.com">blog</a></li>
-						   </ul>
-					   </div>
-					</div>
-					{% endblock footer %}
-				</footer>
-			</div>
-		</div>
-	{% endblock container %}
+    <img id="beta-tag" src="/bundles/ftcweb/images/beta-tag.png">
 
     {{ parent() }}
 {% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="{{ path("home") }}">{% block brand %}Fix That Code!<span id="small-beta-tag">Beta</span>{% endblock %}</a>
+
+                {% block nav_content %}
+                    <ul class="nav">
+                        <li class="active"><a href="{{ path("home") }}">Home</a></li>
+                    </ul>
+                {% endblock %}
+
+                {% block login_bar %}
+                    <ul class="nav pull-right">
+                    {% if has_security_context() %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.user.username}} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><li><a href="">..</a></li></li>
+                                </ul>
+                            </li>
+                            <li><a href="/logout">Logout <i class="icon-off icon-white"></i></a></li>
+                        {% else %}
+                            <li><a href="{{ path('login') }}">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                        {% endif %}
+                    {% endif %}
+                    </ul>
+                {% endblock %}
+
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+
+        <div class="page">
+
+            {% block flashes %}
+                {{ session_flash() }}
+            {% endblock flashes %}
+
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+
+            <footer class="well">
+                {% block footer %}
+                    <div class="row-fluid">
+                        <div class="span6">
+                            &copy; {{ "now"|date('Y') }} - Developed by <a href="http://doh.ms">Rafael Dohms</a>.
+                        </div>
+                        <div class="span6 right footer-nav">
+                            <ul>
+                                <li class="divider-vertical"><a href="https://github.com/rdohms/fixthatcode.com/issues">report bugs</a></li>
+                                <li class="divider-vertical"><a href="{{ path("about") }}">about</a></li>
+                                <li class="divider-vertical"><a href="http://rdohms.github.com/fixthatcode.com">blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endblock footer %}
+            </footer>
+        </div>
+    </div>
+{% endblock container %}
 
 {% block foot_script %}
     {{ parent() }}

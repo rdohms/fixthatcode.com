@@ -1,5 +1,5 @@
 {
-    "hash": "6fda99130002c46ac3e9b839b3454b69",
+    "hash": "cf21476dabb6a1261a73867f217d00f4",
     "packages": [
         {
             "name": "beberlei/loggly-bundle",
@@ -1361,6 +1361,54 @@
             "description": "This bundle generates code for you"
         },
         {
+            "name": "shtumi/useful-bundle",
+            "version": "dev-master",
+            "target-dir": "Shtumi/UsefulBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shtumi/ShtumiUsefulBundle",
+                "reference": "4b47c85589cb177323f7d3a81cc88a5aa2ae4830"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/shtumi/ShtumiUsefulBundle/archive/4b47c85589cb177323f7d3a81cc88a5aa2ae4830.zip",
+                "reference": "4b47c85589cb177323f7d3a81cc88a5aa2ae4830",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "master-dev"
+            },
+            "suggest": {
+                "sonata-project/admin-bundle": "master-dev",
+                "sonata-project/doctrine-orm-admin-bundle": "master-dev"
+            },
+            "time": "2012-08-27 07:12:30",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Shtumi\\UsefulBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mikhail Shtukin",
+                    "email": "shtumi@tut.by"
+                }
+            ],
+            "description": "Symfony ShtumiUsefulBundle",
+            "keywords": [
+                "Ajax Autocomplete form type",
+                "Dependent filtered form type",
+                "daterange",
+                "shtumi"
+            ]
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "dev-master",
             "source": {
@@ -1823,6 +1871,7 @@
         "mopa/bootstrap-bundle": 20,
         "beberlei/loggly-bundle": 20,
         "dms/dms": 20,
-        "knplabs/knp-paginator-bundle": 20
+        "knplabs/knp-paginator-bundle": 20,
+        "shtumi/useful-bundle": 20
     }
 }

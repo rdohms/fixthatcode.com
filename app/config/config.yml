@@ -24,6 +24,7 @@ twig:
     form:
         resources:
            - 'MopaBootstrapBundle:Form:fields.html.twig'
+           - 'ShtumiUsefulBundle::fields.html.twig'
 
 # Assetic Configuration
 assetic:
