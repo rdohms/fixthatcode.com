@@ -41,7 +41,7 @@
         "ornicar/gravatar-bundle":          "dev-master",
 
         "mopa/bootstrap-bundle":            "2.1.x-dev",
-        "twitter/bootstrap":                "master",
+        "twitter/bootstrap":                "~2.3",
 
         "beberlei/loggly-bundle":           "dev-master",
 

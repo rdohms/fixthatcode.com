@@ -36,6 +36,10 @@ cp $BASEDIR/config/production.yml $STAGING_DIR/app/config/parameters.yml
 echo "Composer install"
 export SYMFONY_ENV=prod && composer install --prefer-dist --optimize-autoloader -n
 
+## Assets
+echo "Assets install"
+export SYMFONY_ENV=prod && app/console assetic:dump
+
 ### NPM deps
 #echo "NPM install"
 #npm install
@@ -46,7 +50,7 @@ export SYMFONY_ENV=prod && composer install --prefer-dist --optimize-autoloader 
 
 ## Package
 echo "Packaging..."
-COPYFILE_DISABLE=1 tar --exclude="./.git" --exclude="./node_modules" --exclude="./vendor/bower_components" --exclude="./ansible" --exclude="./app/cache" --exclude="./app/logs"  --exclude="./web/media" -czf $PACKAGE_DIR/podtrack-$BRANCH-$NOW.tar.gz ./
+COPYFILE_DISABLE=1 tar --exclude="./.git" --exclude="./node_modules" --exclude="./vendor/bower_components" --exclude="./ansible" --exclude="./app/cache" --exclude="./app/logs"  --exclude="./web/media" -czf $PACKAGE_DIR/ftc-$BRANCH-$NOW.tar.gz ./
 
 ## Move out
 echo "Back into base"
