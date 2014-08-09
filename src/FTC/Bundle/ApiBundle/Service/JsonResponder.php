@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Json Responder
  *
- * Is capable of responding with a josn encoded response, it wraps functionality
+ * Is capable of responding with a json encoded response, it wraps functionality
  */
 class JsonResponder
 {
