@@ -1,0 +1,5 @@
+[production]
+104.131.219.120 ansible_ssh_user=root
+
+[vagrant]
+192.168.33.95

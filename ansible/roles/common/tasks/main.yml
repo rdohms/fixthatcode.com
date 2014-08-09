@@ -1,0 +1,22 @@
+# Required for adding other apt repos downthe line
+# Update the repo, because most boxes are heavily outdated
+- name: apt-get | Update repository
+  apt: update_cache=yes
+
+- name: Install System Packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - curl
+    - wget
+    - python-software-properties
+    - git
+    - acl
+    - fail2ban
+
+- name: github | accept key
+  lineinfile: dest=/etc/ssh/ssh_known_hosts
+      line="{{lookup('pipe', 'ssh-keyscan github.com') }}"
+      state=present
+      create=yes
+      mode=0644

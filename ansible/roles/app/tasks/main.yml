@@ -1,0 +1,19 @@
+---
+- name: app | Config file
+  template: src=parameters.yml.j2 dest={{ dirs.deploy }}/app/config
+
+- name: Set cache folder permissions
+  shell: >
+    APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data' | grep -v root | head -1 | cut -d\  -f1` &&
+    setfacl -R -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX {{ dirs.deploy }}/app/cache {{ dirs.deploy }}/app/logs {{ dirs.deploy }}/web/media &&
+    setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX {{ dirs.deploy }}/app/cache {{ dirs.deploy }}/app/logs {{ dirs.deploy }}/web/media
+  when: use_setfacl
+
+- name: app | Install deps
+  shell: cd {{ dirs.deploy }} && composer install
+
+- name: app | Migrations
+  shell: cd {{ dirs.deploy }} && app/console doctrine:migrations:migrate -n
+
+- name: app | Assets
+  shell: cd {{ dirs.deploy }} && app/console assets:install web

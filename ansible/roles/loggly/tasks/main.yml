@@ -1,0 +1,3 @@
+- name: Loggly | install rsyslog config
+  copy: src=loggly-conf dest=/etc/rsyslog.d/loggly.conf
+  notify: restart rsyslog

@@ -1,0 +1,51 @@
+---
+- name: Register timestamp
+  shell: date '+%F-%s'
+  register: timestamp
+
+- name: deploy | Deploy folders presence
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ dirs.releases }}"
+    - "{{ dirs.shared }}"
+    - "{{ dirs.releases }}/{{ timestamp.stdout }}"
+
+- name: deploy | App folder permissions
+  file: path={{ item }} state=directory owner=www-data
+  with_items:
+    - "{{ dirs.shared }}/logs"
+    - "{{ dirs.shared }}/cache"
+    - "{{ dirs.shared }}/media/cache"
+    - "{{ dirs.shared }}/media/uploads"
+
+- name: deploy | copy and unarchive release
+  unarchive: copy=yes src={{ release_pkg }} dest={{ dirs.releases }}/{{ timestamp.stdout }}
+
+- name: deploy | application folders symlinking
+  file: src={{ item.src }} dest={{ item.dest }} state=link
+  with_items:
+    - { src: "{{ dirs.shared }}/logs",  dest: "{{ dirs.releases }}/{{ timestamp.stdout}}/app/logs" }
+    - { src: "{{ dirs.shared }}/cache", dest: "{{ dirs.releases }}/{{ timestamp.stdout}}/app/cache" }
+    - { src: "{{ dirs.shared }}/media", dest: "{{ dirs.releases }}/{{ timestamp.stdout}}/web/media" }
+
+- name: deploy | updates symlink
+  file: src={{ dirs.releases }}/{{ timestamp.stdout }} dest={{ dirs.deploy }} state=link
+
+- name: Set cache folder permissions
+  shell: >
+    APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data' | grep -v root | head -1 | cut -d\  -f1` &&
+    setfacl -R -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX {{ dirs.deploy }}/app/cache {{ dirs.deploy }}/app/logs {{ dirs.deploy }}/web/media &&
+    setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX {{ dirs.deploy }}/app/cache {{ dirs.deploy }}/app/logs {{ dirs.deploy }}/web/media
+  when: use_setfacl
+
+- name: app | Migrations
+  shell: cd {{ dirs.deploy }} && app/console doctrine:migrations:migrate -n --env=prod
+
+- name: app | Assets
+  shell: cd {{ dirs.deploy }} && app/console assets:install web --env=prod
+
+- name: app | Clear cache
+  shell: cd {{ dirs.deploy }} && app/console cache:clear --env=prod
+  notify:
+    - restart php5-fpm
+    - restart nginx

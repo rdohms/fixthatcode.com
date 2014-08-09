@@ -1,0 +1,21 @@
+## webapp
+
+app_name: fixthatcode
+app_url: fixthatcode.com
+
+hostname: "{{ app_name }}"
+webserver_name: "{{ app_url }}"
+
+base_dir: "/var/www/fixthatcode"
+dirs:
+    deploy: "/var/www/{{ app_name }}/current"
+    docroot: "/var/www/{{ app_name }}/current/web"
+    releases: "{{ base_dir }}/releases"
+    shared: "{{ base_dir }}/shared"
+
+database:
+    name: "ftc"
+    user: root
+    passwd: root
+
+use_setfacl: true

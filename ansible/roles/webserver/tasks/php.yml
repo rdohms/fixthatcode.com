@@ -1,0 +1,28 @@
+- name: php | Add PHP repo
+  apt_repository: repo='ppa:ondrej/php5' update_cache=yes
+  tags:
+    - php
+
+- name: php | PHP core and required modules
+  action: apt pkg={{ item }} state=latest
+  notify:
+    - restart nginx
+    - restart php5-fpm
+  tags:
+    - php
+  with_items:
+    - php5
+    - php5-fpm
+    - php5-mysql
+    - php5-xmlrpc
+    - php5-gd
+    - php5-apcu
+    - php5-curl
+    - php5-intl
+    - php5-memcached
+    - php5-mcrypt
+    - php5-redis
+
+# Only install the client, you may want to use the DB-server on a different machine
+- name: php | MySQL Client only
+  action: apt pkg=mysql-client state=installed

@@ -1,0 +1,10 @@
+- hosts: production
+  user: root
+  sudo: false
+  vars_files:
+    - vars/defaults.yml
+    - vars/production.yml
+  roles:
+    - { role: deploy, tags: [deploy]}
+  vars_prompt:
+    release_pkg: "Release package?"

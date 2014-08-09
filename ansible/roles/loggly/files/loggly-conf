@@ -1,0 +1,24 @@
+$PrivDropToGroup adm
+$ModLoad imfile    # provides support for file monitoring
+
+$InputFileName /var/log/nginx/error.log
+$InputFileTag nginx-error:
+$InputFileStateFile state-nginx-error
+$InputFileSeverity error
+$InputRunFileMonitor
+
+$InputFilePollInterval 10
+
+#Add a tag for nginx events
+$template LogglyFormatNginx,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [4dbac9ed-85a2-429a-a644-3e1739c0385a@41058 tag=\"nginx\"] %msg%\n"
+
+if $programname == 'nginx-access' then @@logs-01.loggly.com:514;LogglyFormatNginx
+if $programname == 'nginx-access' then ~
+if $programname == 'nginx-error' then @@logs-01.loggly.com:514;LogglyFormatNginx
+if $programname == 'nginx-error' then ~
+
+# forward all logs to loggly: https://podtrack.loggly.com
+$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [4dbac9ed-85a2-429a-a644-3e1739c0385a@41058] %msg%\n"
+
+*.* @@logs-01.loggly.com:514;LogglyFormat
+

@@ -5,7 +5,6 @@ app/logs/*
 app/config/parameters.yml
 app/phpunit.xml
 
-build/
 vendor/
 tmp/*
 
@@ -13,3 +12,9 @@ tmp/*
 *.tmproj
 .idea
 .rsync_cache
+
+
+# Prod
+build/config/production.yml
+build/packages
+build/staging-dir
